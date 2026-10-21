@@ -1,0 +1,6 @@
+{
+  "name": "Saracen Cyber Defender",
+  "description": "Interactive corporate cybersecurity quiz game for Saracen Uganda Ltd - Cyber Awareness Month.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

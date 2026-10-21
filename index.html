@@ -1,0 +1,2977 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saracen Cyber Defender: Kansanga HQ Edition | Saracen Uganda Ltd</title>
+  <meta name="description" content="Cyber Awareness Month interactive quiz and live leaderboard for Saracen Uganda Ltd." />
+  <meta property="og:title" content="Saracen Cyber Defender: Kansanga HQ Edition" />
+  <meta property="og:description" content="Test your cybersecurity instincts for Cyber Awareness Month — October." />
+  <meta property="og:type" content="website" />
+  <style>
+    /* Reset & Base Variables */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Primary Saracen Corporate Blues & Whites */
+      --color-navy-darkest: #00172e;
+      --color-navy: #003057;
+      --color-navy-light: #084172;
+      --color-blue-accent: #0066cc;
+      --color-blue-electric: #0284c7;
+      --color-blue-glow: rgba(2, 132, 199, 0.25);
+      --color-ice-blue: #f0f7ff;
+      --color-ice-blue-border: #bfdbfe;
+      --color-white: #FFFFFF;
+      --color-white-translucent: rgba(255, 255, 255, 0.92);
+
+      /* Highlight & Alert Accents */
+      --color-crimson: #E31837;
+      --color-crimson-hover: #c4122d;
+      
+      /* Feedback Colors */
+      --color-correct-bg: #d4edda;
+      --color-correct-border: #28a745;
+      --color-correct-text: #155724;
+      
+      --color-incorrect-bg: #f8d7da;
+      --color-incorrect-border: #dc3545;
+      --color-incorrect-text: #721c24;
+
+      /* Neutrals */
+      --color-gray-100: #f1f5f9;
+      --color-gray-200: #e2e8f0;
+      --color-gray-400: #94a3b8;
+      --color-gray-600: #475569;
+      --color-gray-700: #334155;
+
+      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--color-navy);
+      background-image: 
+        radial-gradient(circle at 50% 8%, rgba(0, 102, 204, 0.38) 0%, transparent 65%),
+        radial-gradient(circle at 10% 90%, rgba(2, 132, 199, 0.18) 0%, transparent 45%),
+        linear-gradient(180deg, var(--color-navy) 0%, var(--color-navy-darkest) 100%);
+      color: var(--color-navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Animated Grid Pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Canvas for Confetti */
+    #celebrationCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* =========================================================
+       DISTINCT THEME HEADER BANNER (Responsive Mobile / Tablet / Desktop)
+       ========================================================= */
+    .theme-banner {
+      width: 100%;
+      background: linear-gradient(90deg, #9b0f23 0%, var(--color-crimson) 50%, #9b0f23 100%);
+      color: var(--color-white);
+      padding: 10px 18px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .theme-banner-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .theme-banner-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      order: 1;
+    }
+
+    .theme-banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      order: 2;
+    }
+
+    .banner-btn {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: var(--color-white);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: nowrap;
+    }
+
+    .banner-btn:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .banner-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Equalizer Wave Bars for Sci-Fi Cyber Music */
+    .music-wave-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 14px;
+      width: 14px;
+      margin-right: 2px;
+      vertical-align: middle;
+    }
+
+    .music-wave-bars .bar {
+      width: 3px;
+      background: #38bdf8;
+      border-radius: 1px;
+      height: 4px;
+      transition: height 0.2s ease;
+    }
+
+    .music-wave-bars.playing .bar-1 {
+      animation: musicBarJump 0.65s ease-in-out infinite alternate;
+    }
+    .music-wave-bars.playing .bar-2 {
+      animation: musicBarJump 0.48s ease-in-out infinite alternate 0.15s;
+    }
+    .music-wave-bars.playing .bar-3 {
+      animation: musicBarJump 0.78s ease-in-out infinite alternate 0.3s;
+    }
+
+    @keyframes musicBarJump {
+      0% { height: 3px; }
+      100% { height: 13px; }
+    }
+
+    /* =========================================================
+       MAIN LAYOUT & BRAND HEADER
+       ========================================================= */
+    .game-wrapper {
+      width: 100%;
+      max-width: 860px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-header {
+      text-align: center;
+      margin-bottom: 22px;
+      color: var(--color-white);
+      width: 100%;
+    }
+
+    .brand-logo-lockup {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 6px;
+      position: relative;
+    }
+
+    /* Scanning radar emblem */
+    .emblem-wrapper {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(2, 132, 199, 0.45);
+      flex-shrink: 0;
+    }
+
+    .emblem-wrapper svg {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: var(--color-white);
+      stroke-width: 2.3;
+    }
+
+    .radar-pulse {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 2px solid rgba(56, 189, 248, 0.65);
+      border-radius: 16px;
+      animation: pulseGlow 2.5s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.96); opacity: 0.85; }
+      50% { transform: scale(1.08); opacity: 0.2; }
+      100% { transform: scale(0.96); opacity: 0.85; }
+    }
+
+    .company-title {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      line-height: 1.15;
+    }
+
+    .branch-sub {
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      color: #93c5fd;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================================================
+       PRIMARY GAME CARD
+       ========================================================= */
+    .game-card {
+      background: var(--color-white);
+      color: var(--color-navy);
+      width: 100%;
+      border-radius: 22px;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.9),
+        0 0 35px rgba(0, 102, 204, 0.25);
+      padding: 34px 32px;
+      position: relative;
+      overflow: hidden;
+      border-top: 5px solid var(--color-blue-accent);
+      transition: all 0.25s ease;
+    }
+
+    /* Card Top Bar (Scenario count, defender tag, live score) */
+    .card-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--color-ice-blue-border);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .scenario-indicator {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-ice-blue);
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--color-ice-blue-border);
+    }
+
+    .scenario-indicator svg {
+      stroke: var(--color-blue-accent);
+    }
+
+    .topbar-right-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .player-tag {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 6px 12px;
+      border-radius: 8px;
+      max-width: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .score-badge {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-white);
+      background: var(--color-navy);
+      padding: 6px 15px;
+      border-radius: 8px;
+      font-variant-numeric: tabular-nums;
+      box-shadow: 0 2px 8px rgba(0, 48, 87, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Lively Progress Bar */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-blue-accent) 0%, #0ea5e9 100%);
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
+    }
+
+    /* =========================================================
+       VOICE DISPATCH BANNER (Speech Synthesis UI + Waveform)
+       ========================================================= */
+    .voice-dispatch-banner {
+      background: linear-gradient(90deg, #021e38 0%, #003057 60%, #0b3d68 100%);
+      border: 1.5px solid #38bdf8;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.22);
+      animation: slideUp 0.3s ease-out;
+    }
+
+    .voice-dispatch-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-grow: 1;
+    }
+
+    .voice-dispatch-wave {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 22px;
+      width: 20px;
+      flex-shrink: 0;
+    }
+
+    .voice-dispatch-wave .vbar {
+      width: 3px;
+      background: #38bdf8;
+      border-radius: 2px;
+      height: 5px;
+      transition: height 0.2s ease;
+    }
+
+    .voice-dispatch-wave.active .vbar-1 {
+      animation: voiceBarJump 0.45s ease-in-out infinite alternate;
+    }
+    .voice-dispatch-wave.active .vbar-2 {
+      animation: voiceBarJump 0.32s ease-in-out infinite alternate 0.1s;
+    }
+    .voice-dispatch-wave.active .vbar-3 {
+      animation: voiceBarJump 0.55s ease-in-out infinite alternate 0.2s;
+    }
+    .voice-dispatch-wave.active .vbar-4 {
+      animation: voiceBarJump 0.38s ease-in-out infinite alternate 0.05s;
+    }
+
+    @keyframes voiceBarJump {
+      0% { height: 4px; }
+      100% { height: 20px; }
+    }
+
+    .voice-dispatch-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .voice-dispatch-tag {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .voice-dispatch-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.45;
+      font-style: italic;
+    }
+
+    .voice-replay-btn {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: var(--color-white);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .voice-replay-btn:hover {
+      background: rgba(255, 255, 255, 0.26);
+      transform: translateY(-1px);
+    }
+
+    /* Scenario Title & Text */
+    .scenario-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 12px;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .scenario-text {
+      font-size: 1.06rem;
+      font-weight: 500;
+      color: var(--color-gray-700);
+      margin-bottom: 24px;
+      line-height: 1.65;
+      background: #f8fafc;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border-left: 4px solid var(--color-blue-accent);
+    }
+
+    /* Options List */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option-btn {
+      width: 100%;
+      background: var(--color-white);
+      color: var(--color-navy);
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-family: inherit;
+      font-size: 1.02rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.22s ease,
+                  border-color 0.22s ease,
+                  box-shadow 0.22s ease,
+                  opacity 0.22s ease;
+      line-height: 1.45;
+      outline: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+      position: relative;
+      transform: translateZ(0);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--color-blue-accent);
+      background: var(--color-ice-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 102, 204, 0.15);
+    }
+
+    .option-btn:active:not(:disabled) {
+      transform: scale(0.985) translateY(0);
+      box-shadow: 0 2px 6px rgba(0, 102, 204, 0.1);
+    }
+
+    .option-btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.35);
+    }
+
+    .option-prefix {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--color-navy);
+      color: var(--color-white);
+      font-size: 0.9rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .option-text {
+      flex-grow: 1;
+    }
+
+    /* Option States - Animated Success & Shake */
+    .option-btn.correct {
+      background-color: var(--color-correct-bg) !important;
+      border-color: var(--color-correct-border) !important;
+      color: var(--color-correct-text) !important;
+      box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.25), 0 6px 18px rgba(40, 167, 69, 0.2) !important;
+      animation: correctPop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .option-btn.correct .option-prefix {
+      background: var(--color-correct-border);
+      color: var(--color-white);
+      animation: badgeCheckSpin 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .option-btn.incorrect {
+      background-color: var(--color-incorrect-bg) !important;
+      border-color: var(--color-incorrect-border) !important;
+      color: var(--color-incorrect-text) !important;
+      box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.25), 0 6px 18px rgba(220, 53, 69, 0.15) !important;
+      animation: incorrectShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+    .option-btn.incorrect .option-prefix {
+      background: var(--color-incorrect-border);
+      color: var(--color-white);
+      animation: badgeShudder 0.4s ease forwards;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+    .option-btn:disabled:not(.correct):not(.incorrect) {
+      opacity: 0.45;
+      border-color: var(--color-gray-200);
+      background: var(--color-gray-100);
+      transform: scale(0.99);
+    }
+
+    /* Inline Feedback Box */
+    .feedback-box {
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.5;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      animation: slideUp 0.28s ease-out;
+    }
+
+    .feedback-box.correct {
+      background-color: var(--color-correct-bg);
+      border: 2px solid var(--color-correct-border);
+      color: var(--color-correct-text);
+    }
+
+    .feedback-box.incorrect {
+      background-color: var(--color-incorrect-bg);
+      border: 2px solid var(--color-incorrect-border);
+      color: var(--color-incorrect-text);
+    }
+
+    .feedback-icon {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      margin-top: 2px;
+    }
+
+    /* Primary Action Buttons */
+    .primary-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--color-crimson) 0%, #b8142c 100%);
+      color: var(--color-white);
+      border: none;
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-family: inherit;
+      font-size: 1.08rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      letter-spacing: 0.03em;
+      box-shadow: 0 6px 18px rgba(227, 24, 55, 0.35);
+    }
+
+    .primary-btn:hover {
+      background: linear-gradient(135deg, #f02848 0%, var(--color-crimson) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(227, 24, 55, 0.45);
+    }
+
+    .primary-btn:active {
+      transform: translateY(0);
+    }
+
+    .secondary-btn {
+      width: 100%;
+      background: var(--color-ice-blue);
+      color: var(--color-navy);
+      border: 2px solid var(--color-blue-accent);
+      border-radius: 12px;
+      padding: 14px 22px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .secondary-btn:hover {
+      background: #e0f2fe;
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       START SCREEN & PLAYER PROFILE INPUTS
+       ========================================================= */
+    .start-screen {
+      text-align: center;
+      padding: 10px 4px;
+    }
+
+    .start-badge-hero {
+      width: 86px;
+      height: 86px;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 3px solid var(--color-blue-accent);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(0, 102, 204, 0.25);
+    }
+
+    .start-badge-hero svg {
+      width: 44px;
+      height: 44px;
+      stroke: var(--color-navy);
+    }
+
+    .game-hero-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .welcome-text {
+      font-size: 1.05rem;
+      color: var(--color-gray-600);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Player Profile Setup Box */
+    .player-setup-box {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .player-setup-box .setup-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .player-input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .player-name-input {
+      flex-grow: 1;
+      padding: 12px 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--color-navy);
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: var(--color-white);
+    }
+
+    .player-name-input:focus {
+      border-color: var(--color-blue-accent);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+    }
+
+    /* Department Tags */
+    .unit-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .unit-tag-btn {
+      background: var(--color-white);
+      border: 1.5px solid #cbd5e1;
+      padding: 7px 13px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-navy);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .unit-tag-btn:hover {
+      border-color: var(--color-blue-accent);
+      background: var(--color-ice-blue);
+      transform: translateY(-1px);
+    }
+
+    .unit-tag-btn.active {
+      background: var(--color-navy);
+      color: var(--color-white);
+      border-color: var(--color-navy);
+      box-shadow: 0 2px 6px rgba(0, 48, 87, 0.25);
+    }
+
+    /* =========================================================
+       GENDER / VOICE SELECTION SECTION
+       ========================================================= */
+    .gender-selection-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .gender-card-btn {
+      background: var(--color-white);
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .gender-card-btn:hover {
+      border-color: var(--color-blue-accent);
+      background: var(--color-ice-blue);
+      transform: translateY(-1px);
+    }
+
+    .gender-card-btn.active {
+      border-color: var(--color-blue-accent);
+      background: #eff6ff;
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.22);
+    }
+
+    .gender-card-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #dbeafe;
+      color: var(--color-blue-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .gender-card-avatar.female {
+      background: #fee2e2;
+      color: var(--color-crimson);
+    }
+
+    .gender-card-btn.active .gender-card-avatar {
+      background: var(--color-navy);
+      color: var(--color-white);
+    }
+
+    .gender-card-btn.active .gender-card-avatar.female {
+      background: var(--color-crimson);
+      color: var(--color-white);
+    }
+
+    .gender-card-info {
+      flex-grow: 1;
+    }
+
+    .gender-card-title {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      display: block;
+    }
+
+    .gender-card-sub {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--color-gray-600);
+      display: block;
+    }
+
+    .gender-check-indicator {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .gender-card-btn.active .gender-check-indicator {
+      background: var(--color-blue-accent);
+      color: var(--color-white);
+    }
+
+    /* Voice Preview Bar */
+    .voice-preview-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+
+    .voice-test-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--color-navy);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .voice-test-btn:hover {
+      background: #e2e8f0;
+      border-color: #94a3b8;
+    }
+
+    .voice-test-btn svg {
+      color: var(--color-blue-accent);
+    }
+
+    .voice-note-hint {
+      font-size: 0.78rem;
+      color: var(--color-gray-600);
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       END SCREEN
+       ========================================================= */
+    .end-screen {
+      text-align: center;
+      padding: 10px 4px;
+    }
+
+    .result-badge-wrap {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .result-badge-wrap.champion {
+      background: #e6f7ec;
+      border: 3.5px solid #28a745;
+    }
+    .result-badge-wrap.champion svg {
+      stroke: #28a745;
+    }
+
+    .result-badge-wrap.solid {
+      background: #eff6ff;
+      border: 3.5px solid var(--color-navy);
+    }
+    .result-badge-wrap.solid svg {
+      stroke: var(--color-navy);
+    }
+
+    .result-badge-wrap.breach {
+      background: #fdf2f2;
+      border: 3.5px solid var(--color-crimson);
+    }
+    .result-badge-wrap.breach svg {
+      stroke: var(--color-crimson);
+    }
+
+    .final-score-callout {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--color-navy);
+      line-height: 1;
+      margin-bottom: 6px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .final-score-label {
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-blue-accent);
+      margin-bottom: 16px;
+    }
+
+    .performance-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .performance-title.champion { color: #1e7e34; }
+    .performance-title.solid { color: var(--color-navy); }
+    .performance-title.breach { color: var(--color-crimson); }
+
+    .tailored-feedback {
+      font-size: 1.05rem;
+      color: var(--color-gray-700);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Live Leaderboard Component */
+    .leaderboard-section {
+      background: #f8fafc;
+      border: 2px solid var(--color-ice-blue-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 26px;
+      text-align: left;
+    }
+
+    .leaderboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .leaderboard-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .leaderboard-title svg {
+      stroke: #d97706;
+    }
+
+    .leaderboard-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #e0f2fe;
+      color: var(--color-blue-accent);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+      font-size: 0.92rem;
+    }
+
+    .leaderboard-table th {
+      color: var(--color-gray-600);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+    }
+
+    .leaderboard-table td {
+      background: var(--color-white);
+      padding: 10px 12px;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .leaderboard-table tr td:first-child {
+      border-left: 1px solid #e2e8f0;
+      border-radius: 8px 0 0 8px;
+      font-weight: 800;
+      width: 44px;
+      text-align: center;
+    }
+
+    .leaderboard-table tr td:last-child {
+      border-right: 1px solid #e2e8f0;
+      border-radius: 0 8px 8px 0;
+      text-align: right;
+    }
+
+    .leaderboard-table tr.highlight-user td {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      font-weight: 700;
+    }
+
+    .leaderboard-table tr.highlight-user td:first-child {
+      border-left: 4px solid var(--color-blue-accent);
+    }
+
+    .rank-medal {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .player-col-name {
+      font-weight: 700;
+      color: var(--color-navy);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .player-col-unit {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--color-gray-600);
+    }
+
+    .score-col-val {
+      font-weight: 800;
+      color: var(--color-navy);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Modal for In-Game Live Leaderboard */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 23, 46, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal-card {
+      background: var(--color-white);
+      border-radius: 18px;
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      border: 2px solid var(--color-ice-blue-border);
+      overflow: hidden;
+      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-header {
+      background: var(--color-navy);
+      color: var(--color-white);
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--color-white);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    /* Emergency IT Banner */
+    .emergency-it-banner {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      font-size: 0.94rem;
+      color: var(--color-navy);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .emergency-it-banner svg {
+      stroke: var(--color-blue-accent);
+      flex-shrink: 0;
+    }
+
+    /* =========================================================
+       CORPORATE FOOTER
+       ========================================================= */
+    .site-footer {
+      width: 100%;
+      background: var(--color-navy-darkest);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      padding: 20px 16px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-footer a {
+      color: #93c5fd;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .site-footer a:hover {
+      color: var(--color-white);
+    }
+
+    /* Utility */
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================================================
+       ANIMATIONS
+       ========================================================= */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes correctPop {
+      0% {
+        transform: scale(1);
+      }
+      40% {
+        transform: scale(1.025) translateY(-2px);
+      }
+      100% {
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes badgeCheckSpin {
+      0% {
+        transform: scale(0.8) rotate(-15deg);
+      }
+      60% {
+        transform: scale(1.18) rotate(6deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes incorrectShake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      15%, 55%, 85% {
+        transform: translateX(-6px);
+      }
+      35%, 70% {
+        transform: translateX(6px);
+      }
+    }
+
+    @keyframes badgeShudder {
+      0%, 100% {
+        transform: scale(1);
+      }
+      30% {
+        transform: scale(0.9) rotate(-10deg);
+      }
+      70% {
+        transform: scale(1.1) rotate(10deg);
+      }
+    }
+
+    #nextBtn:not(.hidden) {
+      animation: nextBtnPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes nextBtnPop {
+      0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE DESIGN (Mobile, Tablet, Desktop)
+       ========================================================= */
+    /* Tablets (up to 768px) */
+    @media (max-width: 768px) {
+      .theme-banner-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+      }
+      .theme-banner-center {
+        font-size: 0.85rem;
+      }
+      .game-wrapper {
+        padding: 18px 14px;
+      }
+      .game-card {
+        padding: 26px 22px;
+        border-radius: 18px;
+      }
+      .company-title {
+        font-size: 1.45rem;
+      }
+    }
+
+    /* Mobile Phones (up to 480px) */
+    @media (max-width: 480px) {
+      .theme-banner {
+        padding: 8px 10px;
+      }
+      .theme-banner-center {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+      }
+      .theme-banner-actions {
+        width: 100%;
+        justify-content: center;
+        gap: 6px;
+      }
+      .banner-btn {
+        padding: 5px 9px;
+        font-size: 0.72rem;
+      }
+      .game-wrapper {
+        padding: 12px 10px;
+      }
+      .game-card {
+        padding: 20px 15px;
+        border-radius: 16px;
+        border-top-width: 4px;
+      }
+      .emblem-wrapper {
+        width: 44px;
+        height: 44px;
+      }
+      .company-title {
+        font-size: 1.25rem;
+      }
+      .branch-sub {
+        font-size: 0.76rem;
+      }
+      .game-hero-title {
+        font-size: 1.45rem;
+      }
+      .welcome-text {
+        font-size: 0.94rem;
+        margin-bottom: 18px;
+      }
+      .player-setup-box {
+        padding: 16px 14px;
+      }
+      .gender-selection-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .gender-card-btn {
+        padding: 10px 12px;
+      }
+      .gender-card-avatar {
+        width: 34px;
+        height: 34px;
+      }
+      .scenario-title {
+        font-size: 1.3rem;
+      }
+      .scenario-text {
+        font-size: 0.98rem;
+        padding: 14px 14px;
+      }
+      .option-btn {
+        padding: 13px 14px;
+        font-size: 0.94rem;
+        gap: 12px;
+      }
+      .option-prefix {
+        width: 28px;
+        height: 28px;
+        font-size: 0.82rem;
+      }
+      .voice-dispatch-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 12px;
+        gap: 10px;
+      }
+      .voice-replay-btn {
+        align-self: flex-end;
+      }
+      .final-score-callout {
+        font-size: 2.5rem;
+      }
+      .performance-title {
+        font-size: 1.45rem;
+      }
+      .site-footer {
+        font-size: 0.78rem;
+        padding: 16px 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .option-btn,
+      .option-btn.correct,
+      .option-btn.incorrect,
+      .option-prefix,
+      .feedback-box,
+      #nextBtn,
+      .radar-pulse,
+      .music-wave-bars.playing .bar,
+      .voice-dispatch-wave.active .vbar {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti Canvas -->
+  <canvas id="celebrationCanvas"></canvas>
+
+  <!-- Distinct Theme Header Banner -->
+  <header class="theme-banner">
+    <div class="theme-banner-inner">
+      <div class="theme-banner-center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>CYBER AWARENESS MONTH — OCTOBER</span>
+      </div>
+
+      <div class="theme-banner-actions">
+        <button id="musicToggleBtn" class="banner-btn" type="button" aria-label="Toggle Sci-Fi Cyber Music">
+          <span class="music-wave-bars" id="musicBars" aria-hidden="true">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+          </span>
+          <span id="musicText">Cyber Music: OFF</span>
+        </button>
+
+        <button id="soundToggleBtn" class="banner-btn" type="button" aria-label="Toggle Sound Effects">
+          <svg id="soundIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <span id="soundText">SFX ON</span>
+        </button>
+
+        <button id="openLeaderboardHeaderBtn" class="banner-btn" type="button" aria-label="Open Live Leaderboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+          </svg>
+          <span>HQ Leaderboard</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Game Container -->
+  <main class="game-wrapper">
+
+    <!-- Lively Brand Header -->
+    <div class="brand-header">
+      <div class="brand-logo-lockup">
+        <div class="emblem-wrapper" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+          <div class="radar-pulse"></div>
+        </div>
+        <div>
+          <h1 class="company-title">Saracen Uganda Ltd</h1>
+          <div class="branch-sub">
+            <span>Kansanga Head Office</span>
+            <span>•</span>
+            <span>IT Security Operations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Game Card -->
+    <section class="game-card" id="gameCard" aria-live="polite">
+
+      <!-- ================= 1. START SCREEN ================= -->
+      <div id="startScreen" class="start-screen">
+        <div class="start-badge-hero" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+
+        <h2 class="game-hero-title">Saracen Cyber Defender: Kansanga HQ Edition</h2>
+        <p class="welcome-text">
+          Defend Saracen Uganda's critical systems, client data, and premises. Take on 10 everyday workplace threat scenarios and see where your unit ranks on the Kansanga HQ Live Leaderboard!
+        </p>
+
+        <!-- Player Profile & Voice Dispatch Setup -->
+        <div class="player-setup-box">
+          <label class="setup-label" for="playerNameInput">Defender Name / Staff ID (For Live Leaderboard):</label>
+          <div class="player-input-row">
+            <input type="text" id="playerNameInput" class="player-name-input" placeholder="e.g., Patrick M. or Shift Patrol 1" maxlength="24" value="Kansanga Defender" />
+          </div>
+
+          <label class="setup-label">Select Department / Station:</label>
+          <div class="unit-tags-row" id="unitTagsContainer">
+            <button type="button" class="unit-tag-btn active" data-unit="Operations">Operations</button>
+            <button type="button" class="unit-tag-btn" data-unit="Control Room">Control Room</button>
+            <button type="button" class="unit-tag-btn" data-unit="Marketing">Marketing</button>
+            <button type="button" class="unit-tag-btn" data-unit="Finance">Finance</button>
+            <button type="button" class="unit-tag-btn" data-unit="Logistics">Logistics</button>
+            <button type="button" class="unit-tag-btn" data-unit="Technical">Technical</button>
+            <button type="button" class="unit-tag-btn" data-unit="Customer Care">Customer Care</button>
+            <button type="button" class="unit-tag-btn" data-unit="Legal">Legal</button>
+            <button type="button" class="unit-tag-btn" data-unit="Human Resources">Human Resources</button>
+          </div>
+
+          <!-- Gender & Voice Dispatch Selection -->
+          <label class="setup-label">Select Officer Profile & Voice Dispatch Greeting:</label>
+          <div class="gender-selection-row" id="genderSelectionContainer">
+            <button type="button" class="gender-card-btn active" data-gender="male" id="genderMaleBtn" aria-label="Select Male Defender with Male Voiceover">
+              <div class="gender-card-avatar" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="gender-card-info">
+                <span class="gender-card-title">Male Officer</span>
+                <span class="gender-card-sub">Male Voice Dispatch</span>
+              </div>
+              <div class="gender-check-indicator" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </button>
+
+            <button type="button" class="gender-card-btn" data-gender="female" id="genderFemaleBtn" aria-label="Select Female Defender with Female Voiceover">
+              <div class="gender-card-avatar female" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="gender-card-info">
+                <span class="gender-card-title">Female Officer</span>
+                <span class="gender-card-sub">Female Voice Dispatch</span>
+              </div>
+              <div class="gender-check-indicator" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </button>
+          </div>
+
+          <div class="voice-preview-row">
+            <button type="button" class="voice-test-btn" id="previewVoiceBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+              <span>Test Voice Greeting (<span id="activeGenderLabel">Male Voice</span>)</span>
+            </button>
+            <span class="voice-note-hint">Plays automatically upon starting your shift</span>
+          </div>
+        </div>
+
+        <button id="startBtn" class="primary-btn" type="button">
+          <span>Start Your Shift</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+
+        <button id="viewLeaderboardStartBtn" class="secondary-btn" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+          </svg>
+          <span>View Live Kansanga HQ Leaderboard</span>
+        </button>
+      </div>
+
+      <!-- ================= 2. QUIZ SCREEN ================= -->
+      <div id="quizScreen" class="hidden">
+        <!-- Voice Dispatch Banner -->
+        <div id="voiceDispatchBanner" class="voice-dispatch-banner">
+          <div class="voice-dispatch-left">
+            <div class="voice-dispatch-wave" id="voiceWaveVisualizer" aria-hidden="true">
+              <span class="vbar vbar-1"></span>
+              <span class="vbar vbar-2"></span>
+              <span class="vbar vbar-3"></span>
+              <span class="vbar vbar-4"></span>
+            </div>
+            <div class="voice-dispatch-content">
+              <div class="voice-dispatch-tag" id="voiceDispatchTag">🎙️ Kansanga HQ Voice Dispatch (Male Officer)</div>
+              <div class="voice-dispatch-text" id="voiceDispatchText">"Welcome to Saracen Cyber Defender, Officer Kansanga Defender. Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your shift!"</div>
+            </div>
+          </div>
+          <button type="button" class="voice-replay-btn" id="replayVoiceBtn" title="Replay Welcome Dispatch">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>Replay Voice</span>
+          </button>
+        </div>
+
+        <!-- Card Top Bar: Live Counter, Defender Tag, Score -->
+        <div class="card-topbar">
+          <div class="scenario-indicator" id="scenarioIndicator">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <line x1="9" y1="9" x2="15" y2="9"/>
+              <line x1="9" y1="13" x2="13" y2="13"/>
+            </svg>
+            <span id="scenarioCountText">Scenario 1 of 10</span>
+          </div>
+
+          <div class="topbar-right-controls">
+            <div class="player-tag" id="activePlayerTag">Kansanga Defender</div>
+            <div class="score-badge" id="liveScoreBadge" aria-label="Current score">
+              Score: <span id="currentScoreSpan">0</span>/<span id="totalScenariosSpan">10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Scenario Prompt -->
+        <h3 class="scenario-title" id="scenarioTitle">Scenario Title</h3>
+        <p class="scenario-text" id="scenarioText">Scenario prompt text goes here.</p>
+
+        <!-- 4 Multiple Choice Options -->
+        <div class="options-grid" id="optionsContainer" role="group" aria-label="Multiple choice answers">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Inline Feedback Box (Shown after click) -->
+        <div id="feedbackBox" class="feedback-box hidden" role="alert">
+          <svg class="feedback-icon" id="feedbackIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Icon changed via JS -->
+          </svg>
+          <div id="feedbackMessage">Feedback explanation text.</div>
+        </div>
+
+        <!-- Next Scenario Button -->
+        <button id="nextBtn" class="primary-btn hidden" type="button">
+          <span>Next Scenario</span>
+          <span aria-hidden="true">➔</span>
+        </button>
+      </div>
+
+      <!-- ================= 3. END SCREEN ================= -->
+      <div id="endScreen" class="end-screen hidden">
+        <div id="resultBadge" class="result-badge-wrap champion" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+
+        <div class="final-score-callout" id="finalScoreDisplay">0 / 10</div>
+        <div class="final-score-label">Final Evaluation Score</div>
+
+        <h3 class="performance-title champion" id="performanceTitle">Cyber Security Champion</h3>
+        <p class="tailored-feedback" id="tailoredFeedbackText">
+          Tailored feedback text will appear here.
+        </p>
+
+        <!-- Emergency IT Banner -->
+        <div class="emergency-it-banner">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>Immediate IT Security Assistance: <strong>0800 220 580</strong> (Toll-Free) | Kansanga IT Office</span>
+        </div>
+
+        <!-- Live Leaderboard Section -->
+        <div class="leaderboard-section">
+          <div class="leaderboard-header">
+            <div class="leaderboard-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                <path d="M4 22h16"></path>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+              </svg>
+              <span>Kansanga HQ Live Leaderboard</span>
+            </div>
+            <span class="leaderboard-badge" id="playerRankBadge">Top Defenders</span>
+          </div>
+
+          <table class="leaderboard-table" aria-label="Kansanga HQ Staff Leaderboard">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align:center;">#</th>
+                <th scope="col">Defender / Unit</th>
+                <th scope="col" style="text-align:right;">Score</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardTbody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <button id="playAgainBtn" class="primary-btn" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="1 4 1 10 7 10"/>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+          <span>Retake Security Shift</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Modal for In-Game / Start-Screen Leaderboard View -->
+    <div id="leaderboardModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="modalTitle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+            </svg>
+            <span>Kansanga HQ Defender Standings</span>
+          </h3>
+          <button class="modal-close-btn" id="closeLeaderboardModalBtn" type="button" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.9rem; color:var(--color-gray-600); margin-bottom:14px;">
+            Live departmental scores for Saracen Uganda Ltd Cyber Awareness Month:
+          </p>
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th scope="col" style="text-align:center;">#</th>
+                <th scope="col">Defender / Unit</th>
+                <th scope="col" style="text-align:right;">Score</th>
+              </tr>
+            </thead>
+            <tbody id="modalLeaderboardTbody">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Corporate Footer -->
+  <footer class="site-footer">
+    SARACEN UGANDA LTD | Kansanga Head Office | Tel: <a href="tel:0800220580">0800 220 580</a> | <a href="http://www.saracen.co.ug" target="_blank" rel="noopener">www.saracen.co.ug</a> | IT Office
+  </footer>
+
+  <!-- =========================================================
+       GAME LOGIC & AUDIO SYNTHESIZERS
+       ========================================================= -->
+  <script>
+    (function () {
+      "use strict";
+
+      // 10 Non-Technical Workplace Scenarios for Saracen Uganda Staff
+      var scenarios = [
+        {
+          id: 1,
+          title: "Pause Before You Panic!",
+          text: "You are checking emails at your desk when an urgent message flashes: 'IT Helpdesk: Your account will be locked in 5 minutes! Click here to verify.' What is your first move?",
+          options: [
+            "Click the link quickly so you don't lose access.",
+            "Reply to the email asking if it's real.",
+            "Pause, check the sender's actual email address, and call the IT Office at 0800 220 580 to verify.",
+            "Forward it to your whole team to warn them."
+          ],
+          correctAnswer: 3, // 1-indexed (option 3)
+          feedback: "Perfect! Phishing emails create a false sense of urgency. Pausing and verifying directly with IT saves the network."
+        },
+        {
+          id: 2,
+          title: "Politeness Doesn't Protect Data",
+          text: "You are badging into the secure server hallway. A person carrying a heavy box of printer paper rushes up behind you, smiling. 'Hold the door, please!' they ask.",
+          options: [
+            "Hold the door for them. It's the polite thing to do.",
+            "Ask them to badge in themselves, or direct them to reception.",
+            "Take the box from them and let them in.",
+            "Ignore them and let them catch the door."
+          ],
+          correctAnswer: 2, // 1-indexed (option 2)
+          feedback: "Spot on! 'Tailgating' relies on our natural politeness. If they don't badge in, don't let them in."
+        },
+        {
+          id: 3,
+          title: "Sticky Notes Are For Ideas",
+          text: "You just updated your system password to a highly secure 16-character phrase. Where do you put it?",
+          options: [
+            "Memorize it or use the company's approved password manager.",
+            "Write it on a sticky note and put it under your keyboard.",
+            "Save it in a Word document on your desktop named 'Passwords'.",
+            "Text it to yourself so it's in your phone."
+          ],
+          correctAnswer: 1, // 1-indexed (option 1)
+          feedback: "Excellent! Password managers or pure memory are the only secure ways to handle credentials. Never leave credentials in plain sight."
+        },
+        {
+          id: 4,
+          title: "Curiosity Killed The Computer",
+          text: "Walking through the Kansanga HQ parking lot toward the main building entrance, you spot a sleek silver USB drive on the pavement labeled 'CONFIDENTIAL: 2026 Salary Reviews'.",
+          options: [
+            "Plug it into your work computer to see whose salary is on there.",
+            "Plug it into your personal phone to check the files.",
+            "Leave it on the floor.",
+            "Hand it directly to the IT Office without plugging it into any machine."
+          ],
+          correctAnswer: 4, // 1-indexed (option 4)
+          feedback: "Great job! Malicious USB drives are dropped intentionally in parking lots and walkways to exploit curiosity. If it isn't yours, don't plug it in."
+        },
+        {
+          id: 5,
+          title: "Hang Up On Fake Tech Support",
+          text: "Your desk phone rings. 'Hi, this is Microsoft Support. We see a critical virus on your Saracen workstation. I need your password to remote in and fix it right now.'",
+          options: [
+            "Give them the password—they sound like professionals.",
+            "Write down the password and read it to them slowly.",
+            "Ask for their employee ID, then give them the password.",
+            "Hang up immediately and report the call to the IT Office."
+          ],
+          correctAnswer: 4, // 1-indexed (option 4)
+          feedback: "Correct! We will NEVER ask for your password over the phone. You successfully stopped a Vishing attack."
+        },
+        {
+          id: 6,
+          title: "Lock It When You Leave",
+          text: "You need to step away from your workstation for 5 minutes to fetch drinking water and speak to a colleague in the corridor. What should you do before walking away?",
+          options: [
+            "Leave the computer screen open because you will only be gone a short moment.",
+            "Turn off the computer screen monitor and hope nobody touches the keyboard.",
+            "Press Windows Key + L (or Lock) to lock your screen so no unauthorized person can read or use your system.",
+            "Ask a nearby colleague to keep an eye on your computer while you are away."
+          ],
+          correctAnswer: 3, // 1-indexed (option 3)
+          feedback: "Spot on! Even a 2-minute unlocked screen gives anyone walking past access to internal emails, confidential rosters, and client files. Always lock your screen!"
+        },
+        {
+          id: 7,
+          title: "The Boss On WhatsApp",
+          text: "You receive an urgent WhatsApp message from an unknown number with the profile picture of the General Manager: 'I am stuck in an urgent executive meeting and cannot take calls. Send 250,000 UGX mobile money to this number immediately for client fuel.' What is your first move?",
+          options: [
+            "Send the mobile money right away so the manager does not get stranded or upset.",
+            "Stop, call the manager on their known official phone number or verify with your supervisor before sending any money.",
+            "Forward the message to your coworkers to see if they can contribute.",
+            "Reply asking if you will receive a cash receipt later."
+          ],
+          correctAnswer: 2, // 1-indexed (option 2)
+          feedback: "Excellent! Executive impersonation on WhatsApp is very common. Genuine Saracen leaders will never ask you to send company money through informal WhatsApp requests."
+        },
+        {
+          id: 8,
+          title: "The Forgotten Printout",
+          text: "You walk over to the shared Kansanga office printer and notice printouts of client security guard rosters and staff emergency phone contacts left on the output tray. What should you do?",
+          options: [
+            "Leave the papers there—whoever printed them will come back for them eventually.",
+            "Crumple them up and toss them into the open wastepaper basket under the printer.",
+            "Pick them up and hand them directly to the colleague who printed them, or give them to your supervisor for secure shredding.",
+            "Take a photo of the client roster with your phone and share it in your team WhatsApp chat."
+          ],
+          correctAnswer: 3, // 1-indexed (option 3)
+          feedback: "Great job! Cybersecurity includes physical papers too. Confidential client and staff lists left lying on shared printers are an easy target for data leaks."
+        },
+        {
+          id: 9,
+          title: "Public Wi-Fi Danger",
+          text: "While waiting at a café during your field rounds, your laptop or work phone detects an open Wi-Fi network called 'FREE_PUBLIC_INTERNET' with no password required. What is the safest move?",
+          options: [
+            "Connect immediately to stream videos and check your company email without using your mobile data bundle.",
+            "Avoid connecting your work device to unverified public Wi-Fi, and use your secure mobile phone hotspot instead.",
+            "Connect to the free Wi-Fi and log into your online banking and company payroll portal.",
+            "Turn down your screen brightness and connect to the free Wi-Fi anyway."
+          ],
+          correctAnswer: 2, // 1-indexed (option 2)
+          feedback: "Spot on! Criminals frequently set up fake 'Free Wi-Fi' hotspots to snoop on passwords and read emails from connected devices. Always use secure mobile data or company connections."
+        },
+        {
+          id: 10,
+          title: "The Mystery Email Attachment",
+          text: "You open your work email and find a message from an unfamiliar sender saying: 'Attached is your updated payment voucher and bonus statement. Click to view.' You were not expecting any payment voucher. What should you do?",
+          options: [
+            "Open the attachment immediately to see how much bonus money you received.",
+            "Forward the email to your personal Yahoo or Gmail account to open it from home.",
+            "Do not open the attachment; delete the email or report it to the IT Office at 0800 220 580.",
+            "Reply back asking 'Who are you and why did you send this?'"
+          ],
+          correctAnswer: 3, // 1-indexed (option 3)
+          feedback: "Correct! Opening unexpected attachments is the number one way workplace computers get infected with viruses and ransomware. If you didn't expect it, don't open it!"
+        }
+      ];
+
+      // Default Pre-seeded Leaderboard for Kansanga HQ Staff (10-question scale)
+      var defaultLeaderboard = [
+        { name: "Dennis O. (Shift Leader)", unit: "Operations", score: 10, date: "Today" },
+        { name: "Grace K. (Supervisor)", unit: "Control Room", score: 10, date: "Today" },
+        { name: "Samuel B. (Brand Lead)", unit: "Marketing", score: 9, date: "Today" },
+        { name: "David M. (Lead Systems)", unit: "Technical", score: 9, date: "Today" },
+        { name: "Aisha N. (Accounts)", unit: "Finance", score: 8, date: "Today" },
+        { name: "Ronald T. (Dispatch)", unit: "Logistics", score: 8, date: "Today" },
+        { name: "Joan K. (Compliance)", unit: "Legal", score: 8, date: "Today" },
+        { name: "Brian E. (Support Desk)", unit: "Customer Care", score: 7, date: "Today" },
+        { name: "Patricia M. (HR Lead)", unit: "Human Resources", score: 7, date: "Today" }
+      ];
+
+      function getStoredLeaderboard() {
+        try {
+          var stored = localStorage.getItem("saracen_cyber_leaderboard_v5");
+          if (stored) {
+            return JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn("Storage error", e);
+        }
+        return defaultLeaderboard.slice();
+      }
+
+      function saveLeaderboard(board) {
+        try {
+          localStorage.setItem("saracen_cyber_leaderboard_v5", JSON.stringify(board));
+        } catch (e) {
+          console.warn("Storage save error", e);
+        }
+      }
+
+      // Game State
+      var currentIndex = 0;
+      var score = 0;
+      var answered = false;
+      var soundEnabled = true;
+      var currentPlayerName = "Kansanga Defender";
+      var currentDepartment = "Operations";
+      var selectedGender = "male"; // "male" or "female"
+
+      // Audio Synthesizer & Sci-Fi Cyber Music Engine (Web Audio API - No external files needed!)
+      var audioCtx = null;
+      var musicPlaying = false;
+      var musicGain = null;
+      var musicInterval = null;
+      var musicStep = 0;
+
+      // Cyberpunk D-Minor Scale (Frequencies in Hz)
+      var CYBER_NOTES = {
+        D1: 36.71,
+        D2: 73.42,
+        F2: 87.31,
+        G2: 98.00,
+        A2: 110.00,
+        C3: 130.81,
+        D3: 146.83,
+        F3: 174.61,
+        G3: 196.00,
+        A3: 220.00,
+        C4: 261.63,
+        D4: 293.66,
+        E4: 329.63,
+        F4: 349.23,
+        G4: 392.00,
+        A4: 440.00,
+        C5: 523.25
+      };
+
+      // 16-step Cyberpunk Bass & Arpeggio Sequences
+      var cyberBassSeq = [
+        CYBER_NOTES.D2, null, CYBER_NOTES.D2, null,
+        CYBER_NOTES.F2, null, CYBER_NOTES.D2, null,
+        CYBER_NOTES.G2, null, CYBER_NOTES.F2, null,
+        CYBER_NOTES.C3, null, CYBER_NOTES.A2, null
+      ];
+
+      var cyberArpSeq = [
+        CYBER_NOTES.D4, CYBER_NOTES.A3, CYBER_NOTES.F4, CYBER_NOTES.D3,
+        CYBER_NOTES.A4, CYBER_NOTES.F3, CYBER_NOTES.D4, CYBER_NOTES.C4,
+        CYBER_NOTES.D4, CYBER_NOTES.F4, CYBER_NOTES.A3, CYBER_NOTES.D3,
+        CYBER_NOTES.C4, CYBER_NOTES.G3, CYBER_NOTES.A3, CYBER_NOTES.F3
+      ];
+
+      function ensureAudioContext() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+      }
+
+      function initMusicGain() {
+        ensureAudioContext();
+        if (!musicGain) {
+          musicGain = audioCtx.createGain();
+          musicGain.gain.setValueAtTime(0.14, audioCtx.currentTime);
+
+          // Subtle stereo delay for atmospheric depth
+          var delayNode = audioCtx.createDelay(0.5);
+          delayNode.delayTime.value = 0.23;
+          var feedbackNode = audioCtx.createGain();
+          feedbackNode.gain.value = 0.22;
+
+          delayNode.connect(feedbackNode);
+          feedbackNode.connect(delayNode);
+          delayNode.connect(musicGain);
+
+          musicGain.connect(audioCtx.destination);
+          musicGain._delay = delayNode;
+        }
+      }
+
+      function playCyberMusicStep() {
+        if (!musicPlaying || !audioCtx) return;
+        var now = audioCtx.currentTime;
+        var step = musicStep % 16;
+        musicStep++;
+
+        // 1. Cyber Sub-Bass Pulse (Warm resonant low-pass saw)
+        var bassFreq = cyberBassSeq[step];
+        if (bassFreq) {
+          var oscB = audioCtx.createOscillator();
+          var filterB = audioCtx.createBiquadFilter();
+          var gainB = audioCtx.createGain();
+
+          oscB.type = "sawtooth";
+          oscB.frequency.setValueAtTime(bassFreq, now);
+
+          filterB.type = "lowpass";
+          filterB.frequency.setValueAtTime(160, now);
+          filterB.frequency.exponentialRampToValueAtTime(320, now + 0.07);
+          filterB.frequency.exponentialRampToValueAtTime(120, now + 0.22);
+          filterB.Q.value = 3.5;
+
+          gainB.gain.setValueAtTime(0.12, now);
+          gainB.gain.linearRampToValueAtTime(0.01, now + 0.24);
+
+          oscB.connect(filterB);
+          filterB.connect(gainB);
+          gainB.connect(musicGain);
+
+          oscB.start(now);
+          oscB.stop(now + 0.25);
+        }
+
+        // 2. Cyber Arpeggio Note (Crisp, plucky cyber synth)
+        var arpFreq = cyberArpSeq[step];
+        if (arpFreq) {
+          var oscA = audioCtx.createOscillator();
+          var filterA = audioCtx.createBiquadFilter();
+          var gainA = audioCtx.createGain();
+
+          oscA.type = "triangle";
+          oscA.frequency.setValueAtTime(arpFreq, now);
+
+          filterA.type = "bandpass";
+          filterA.frequency.setValueAtTime(1350, now);
+          filterA.Q.value = 2.2;
+
+          gainA.gain.setValueAtTime(0.065, now);
+          gainA.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+
+          oscA.connect(filterA);
+          filterA.connect(gainA);
+          gainA.connect(musicGain);
+
+          if (musicGain._delay) {
+            gainA.connect(musicGain._delay);
+          }
+
+          oscA.start(now);
+          oscA.stop(now + 0.17);
+        }
+
+        // 3. Cyber Sub-Beat pulse on 0, 4, 8, 12
+        if (step % 4 === 0) {
+          var oscKick = audioCtx.createOscillator();
+          var gainKick = audioCtx.createGain();
+          oscKick.frequency.setValueAtTime(95, now);
+          oscKick.frequency.exponentialRampToValueAtTime(36, now + 0.12);
+
+          gainKick.gain.setValueAtTime(0.18, now);
+          gainKick.gain.linearRampToValueAtTime(0.001, now + 0.16);
+
+          oscKick.connect(gainKick);
+          gainKick.connect(musicGain);
+
+          oscKick.start(now);
+          oscKick.stop(now + 0.17);
+        }
+      }
+
+      function startCyberMusic() {
+        try {
+          ensureAudioContext();
+          initMusicGain();
+
+          musicGain.gain.cancelScheduledValues(audioCtx.currentTime);
+          musicGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+          musicGain.gain.linearRampToValueAtTime(0.14, audioCtx.currentTime + 1.2);
+
+          musicPlaying = true;
+          musicStep = 0;
+
+          if (musicInterval) clearInterval(musicInterval);
+          // 124 BPM, 16th notes = ~121ms per step
+          musicInterval = setInterval(playCyberMusicStep, 121);
+
+          updateMusicUI(true);
+        } catch (e) {
+          console.warn("Audio autoplay blocked", e);
+        }
+      }
+
+      function stopCyberMusic() {
+        if (!musicPlaying) return;
+        musicPlaying = false;
+        if (musicGain && audioCtx) {
+          try {
+            musicGain.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+          } catch (e) {}
+        }
+        setTimeout(function () {
+          if (!musicPlaying && musicInterval) {
+            clearInterval(musicInterval);
+            musicInterval = null;
+          }
+        }, 450);
+        updateMusicUI(false);
+      }
+
+      function toggleCyberMusic() {
+        if (musicPlaying) {
+          stopCyberMusic();
+        } else {
+          startCyberMusic();
+        }
+      }
+
+      function updateMusicUI(isPlaying) {
+        var musicBars = document.getElementById("musicBars");
+        var musicText = document.getElementById("musicText");
+        var musicToggleBtn = document.getElementById("musicToggleBtn");
+        if (musicBars) {
+          if (isPlaying) {
+            musicBars.classList.add("playing");
+          } else {
+            musicBars.classList.remove("playing");
+          }
+        }
+        if (musicText) {
+          musicText.textContent = isPlaying ? "Cyber Music: ON" : "Cyber Music: OFF";
+        }
+        if (musicToggleBtn) {
+          musicToggleBtn.style.background = isPlaying ? "rgba(2, 132, 199, 0.45)" : "rgba(255, 255, 255, 0.16)";
+          musicToggleBtn.style.borderColor = isPlaying ? "#38bdf8" : "rgba(255, 255, 255, 0.35)";
+        }
+      }
+
+      // Security Radio Dispatch Chime (Two-tone high-tech beep)
+      function playDispatchChime() {
+        if (!soundEnabled) return;
+        try {
+          ensureAudioContext();
+          var now = audioCtx.currentTime;
+          var osc1 = audioCtx.createOscillator();
+          var gain1 = audioCtx.createGain();
+          osc1.type = "sine";
+          osc1.frequency.setValueAtTime(880, now); // A5
+          gain1.gain.setValueAtTime(0.12, now);
+          gain1.gain.linearRampToValueAtTime(0.001, now + 0.12);
+          osc1.connect(gain1);
+          gain1.connect(audioCtx.destination);
+          osc1.start(now);
+          osc1.stop(now + 0.12);
+
+          var osc2 = audioCtx.createOscillator();
+          var gain2 = audioCtx.createGain();
+          osc2.type = "sine";
+          osc2.frequency.setValueAtTime(1318.5, now + 0.11); // E6
+          gain2.gain.setValueAtTime(0.14, now + 0.11);
+          gain2.gain.linearRampToValueAtTime(0.001, now + 0.28);
+          osc2.connect(gain2);
+          gain2.connect(audioCtx.destination);
+          osc2.start(now + 0.11);
+          osc2.stop(now + 0.28);
+        } catch (e) {}
+      }
+
+      function playTone(type) {
+        if (!soundEnabled) return;
+        try {
+          ensureAudioContext();
+          var now = audioCtx.currentTime;
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          if (type === "click") {
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+            osc.start(now);
+            osc.stop(now + 0.08);
+          } else if (type === "correct") {
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(523.25, now); // C5
+            osc.frequency.setValueAtTime(659.25, now + 0.09); // E5
+            osc.frequency.setValueAtTime(783.99, now + 0.18); // G5
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+            osc.start(now);
+            osc.stop(now + 0.35);
+          } else if (type === "incorrect") {
+            osc.type = "sawtooth";
+            osc.frequency.setValueAtTime(260, now);
+            osc.frequency.setValueAtTime(195, now + 0.12);
+            gain.gain.setValueAtTime(0.1, now);
+            gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+            osc.start(now);
+            osc.stop(now + 0.3);
+          } else if (type === "celebration") {
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(587.33, now);
+            osc.frequency.setValueAtTime(880, now + 0.15);
+            osc.frequency.setValueAtTime(1174.66, now + 0.3);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.linearRampToValueAtTime(0.01, now + 0.55);
+            osc.start(now);
+            osc.stop(now + 0.55);
+          }
+        } catch (err) {
+          // Silent fallback if audio is blocked
+        }
+      }
+
+      // Confetti Effect Generator (Zero dependencies)
+      function launchConfetti() {
+        var canvas = document.getElementById("celebrationCanvas");
+        if (!canvas) return;
+        var ctx = canvas.getContext("2d");
+        var width = (canvas.width = window.innerWidth);
+        var height = (canvas.height = window.innerHeight);
+
+        var pieces = [];
+        var colors = ["#003057", "#0066cc", "#0284c7", "#E31837", "#ffffff", "#38bdf8"];
+
+        for (var i = 0; i < 90; i++) {
+          pieces.push({
+            x: Math.random() * width,
+            y: Math.random() * -height * 0.5,
+            w: 8 + Math.random() * 8,
+            h: 8 + Math.random() * 8,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: -2 + Math.random() * 4,
+            vy: 2.5 + Math.random() * 4,
+            rot: Math.random() * 360,
+            vrot: -4 + Math.random() * 8
+          });
+        }
+
+        var animationFrame = null;
+        var startTime = Date.now();
+
+        function render() {
+          ctx.clearRect(0, 0, width, height);
+          var elapsed = Date.now() - startTime;
+          pieces.forEach(function (p) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.vrot;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rot * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+          });
+
+          if (elapsed < 3500) {
+            animationFrame = requestAnimationFrame(render);
+          } else {
+            ctx.clearRect(0, 0, width, height);
+            cancelAnimationFrame(animationFrame);
+          }
+        }
+        render();
+      }
+
+      // =========================================================
+      // GENDER-SPECIFIC VOICE OVER ENGINE (Web Speech API)
+      // =========================================================
+      var availableVoices = [];
+
+      function populateVoices() {
+        if ("speechSynthesis" in window) {
+          availableVoices = window.speechSynthesis.getVoices() || [];
+        }
+      }
+
+      populateVoices();
+      if ("speechSynthesis" in window && window.speechSynthesis.onvoiceschanged !== undefined) {
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+      }
+
+      function findVoiceForGender(gender) {
+        populateVoices();
+        if (!availableVoices || availableVoices.length === 0) return null;
+
+        var englishVoices = availableVoices.filter(function (v) {
+          return v.lang && v.lang.toLowerCase().indexOf("en") === 0;
+        });
+        var pool = englishVoices.length > 0 ? englishVoices : availableVoices;
+
+        var femaleKeywords = ["female", "samantha", "victoria", "zira", "karen", "susan", "serena", "stephanie", "tessa", "moira", "fiona", "ava", "allison", "jenny", "en-us-wavenet-c", "google uk english female"];
+        var maleKeywords = ["male", "david", "daniel", "george", "alex", "mark", "james", "richard", "oliver", "tom", "en-us-wavenet-d", "google uk english male", "guy"];
+
+        var keywords = (gender === "female") ? femaleKeywords : maleKeywords;
+
+        for (var i = 0; i < pool.length; i++) {
+          var vName = (pool[i].name || "").toLowerCase();
+          for (var k = 0; k < keywords.length; k++) {
+            if (vName.indexOf(keywords[k]) !== -1) {
+              return pool[i];
+            }
+          }
+        }
+
+        return pool[0];
+      }
+
+      function setVoiceVisualizerState(isActive) {
+        var wave = document.getElementById("voiceWaveVisualizer");
+        if (wave) {
+          if (isActive) {
+            wave.classList.add("active");
+          } else {
+            wave.classList.remove("active");
+          }
+        }
+      }
+
+      function playWelcomeVoiceover(gender, defenderName, isPreview) {
+        var cleanName = (defenderName && defenderName.trim().length > 0) ? defenderName.trim() : "Defender";
+        
+        var message = "";
+        if (isPreview) {
+          message = (gender === "female")
+            ? "Female voice dispatch active. Welcome, Officer " + cleanName + ". Kansanga Headquarters is ready for your shift."
+            : "Male voice dispatch active. Welcome, Officer " + cleanName + ". Kansanga Headquarters is ready for your shift.";
+        } else {
+          message = (gender === "female")
+            ? "Welcome to Saracen Cyber Defender, Officer " + cleanName + ". Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your shift!"
+            : "Welcome to Saracen Cyber Defender, Officer " + cleanName + ". Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your shift!";
+        }
+
+        // Update Voice Dispatch Banner Text
+        var dispatchTag = document.getElementById("voiceDispatchTag");
+        var dispatchText = document.getElementById("voiceDispatchText");
+        var dispatchBanner = document.getElementById("voiceDispatchBanner");
+
+        if (dispatchTag) {
+          var officerType = (gender === "female") ? "Female Officer Voice" : "Male Officer Voice";
+          dispatchTag.textContent = "🎙️ Kansanga HQ Voice Dispatch (" + officerType + ")";
+        }
+        if (dispatchText) {
+          dispatchText.textContent = '"' + message + '"';
+        }
+        if (dispatchBanner && !isPreview) {
+          dispatchBanner.classList.remove("hidden");
+        }
+
+        // Play security radio alert chime
+        playDispatchChime();
+
+        // Speak using SpeechSynthesis
+        if ("speechSynthesis" in window) {
+          try {
+            window.speechSynthesis.cancel(); // Stop prior speech
+            var utterance = new SpeechSynthesisUtterance(message);
+            var voice = findVoiceForGender(gender);
+            if (voice) {
+              utterance.voice = voice;
+            }
+
+            if (gender === "female") {
+              utterance.pitch = 1.18;
+              utterance.rate = 0.98;
+            } else {
+              utterance.pitch = 0.88;
+              utterance.rate = 0.96;
+            }
+
+            utterance.onstart = function () {
+              setVoiceVisualizerState(true);
+            };
+            utterance.onend = function () {
+              setVoiceVisualizerState(false);
+            };
+            utterance.onerror = function () {
+              setVoiceVisualizerState(false);
+            };
+
+            window.speechSynthesis.speak(utterance);
+          } catch (err) {
+            console.warn("Speech synthesis error", err);
+            setVoiceVisualizerState(false);
+          }
+        }
+      }
+
+      // DOM Elements
+      var startScreen = document.getElementById("startScreen");
+      var quizScreen = document.getElementById("quizScreen");
+      var endScreen = document.getElementById("endScreen");
+
+      var startBtn = document.getElementById("startBtn");
+      var nextBtn = document.getElementById("nextBtn");
+      var playAgainBtn = document.getElementById("playAgainBtn");
+      var viewLeaderboardStartBtn = document.getElementById("viewLeaderboardStartBtn");
+      var openLeaderboardHeaderBtn = document.getElementById("openLeaderboardHeaderBtn");
+      var closeLeaderboardModalBtn = document.getElementById("closeLeaderboardModalBtn");
+      var leaderboardModal = document.getElementById("leaderboardModal");
+
+      var musicToggleBtn = document.getElementById("musicToggleBtn");
+      var soundToggleBtn = document.getElementById("soundToggleBtn");
+      var soundText = document.getElementById("soundText");
+
+      var playerNameInput = document.getElementById("playerNameInput");
+      var unitTagsContainer = document.getElementById("unitTagsContainer");
+      var activePlayerTag = document.getElementById("activePlayerTag");
+
+      var genderMaleBtn = document.getElementById("genderMaleBtn");
+      var genderFemaleBtn = document.getElementById("genderFemaleBtn");
+      var previewVoiceBtn = document.getElementById("previewVoiceBtn");
+      var activeGenderLabel = document.getElementById("activeGenderLabel");
+      var replayVoiceBtn = document.getElementById("replayVoiceBtn");
+
+      var scenarioCountText = document.getElementById("scenarioCountText");
+      var currentScoreSpan = document.getElementById("currentScoreSpan");
+      var totalScenariosSpan = document.getElementById("totalScenariosSpan");
+      var progressBar = document.getElementById("progressBar");
+
+      var scenarioTitle = document.getElementById("scenarioTitle");
+      var scenarioText = document.getElementById("scenarioText");
+      var optionsContainer = document.getElementById("optionsContainer");
+
+      var feedbackBox = document.getElementById("feedbackBox");
+      var feedbackIcon = document.getElementById("feedbackIcon");
+      var feedbackMessage = document.getElementById("feedbackMessage");
+
+      var finalScoreDisplay = document.getElementById("finalScoreDisplay");
+      var performanceTitle = document.getElementById("performanceTitle");
+      var tailoredFeedbackText = document.getElementById("tailoredFeedbackText");
+      var resultBadge = document.getElementById("resultBadge");
+      var playerRankBadge = document.getElementById("playerRankBadge");
+
+      var leaderboardTbody = document.getElementById("leaderboardTbody");
+      var modalLeaderboardTbody = document.getElementById("modalLeaderboardTbody");
+
+      // SVG Icon Helpers
+      var checkIconSvg = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>';
+      var xIconSvg = '<circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>';
+      var shieldChampionSvg = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline>';
+      var shieldSolidSvg = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>';
+      var shieldBreachSvg = '<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>';
+
+      // Department Selection
+      unitTagsContainer.addEventListener("click", function (e) {
+        var btn = e.target.closest(".unit-tag-btn");
+        if (!btn) return;
+        var allBtns = unitTagsContainer.querySelectorAll(".unit-tag-btn");
+        allBtns.forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        currentDepartment = btn.getAttribute("data-unit");
+        playTone("click");
+      });
+
+      // Gender Selection Handling
+      function selectGender(gender) {
+        selectedGender = gender;
+        if (gender === "male") {
+          genderMaleBtn.classList.add("active");
+          genderFemaleBtn.classList.remove("active");
+          if (activeGenderLabel) activeGenderLabel.textContent = "Male Voice";
+        } else {
+          genderFemaleBtn.classList.add("active");
+          genderMaleBtn.classList.remove("active");
+          if (activeGenderLabel) activeGenderLabel.textContent = "Female Voice";
+        }
+        playTone("click");
+      }
+
+      genderMaleBtn.addEventListener("click", function () {
+        selectGender("male");
+      });
+
+      genderFemaleBtn.addEventListener("click", function () {
+        selectGender("female");
+      });
+
+      // Voice Preview Button
+      previewVoiceBtn.addEventListener("click", function () {
+        playTone("click");
+        var rawName = (playerNameInput.value || "").trim();
+        playWelcomeVoiceover(selectedGender, rawName, true);
+      });
+
+      // Replay Voice Button on Quiz Screen
+      if (replayVoiceBtn) {
+        replayVoiceBtn.addEventListener("click", function () {
+          playTone("click");
+          playWelcomeVoiceover(selectedGender, currentPlayerName, false);
+        });
+      }
+
+      // Sound Toggle
+      soundToggleBtn.addEventListener("click", function () {
+        soundEnabled = !soundEnabled;
+        soundText.textContent = soundEnabled ? "SFX ON" : "Muted";
+        soundToggleBtn.style.opacity = soundEnabled ? "1" : "0.7";
+        if (soundEnabled) playTone("click");
+      });
+
+      // Render Leaderboard Tables
+      function renderLeaderboardInto(tbodyElem, currentHighlightName) {
+        var board = getStoredLeaderboard();
+        board.sort(function (a, b) {
+          return b.score - a.score;
+        });
+
+        tbodyElem.innerHTML = "";
+        board.slice(0, 10).forEach(function (item, index) {
+          var tr = document.createElement("tr");
+          var isCurrent = (item.name === currentHighlightName);
+          if (isCurrent) {
+            tr.className = "highlight-user";
+          }
+
+          var rankContent = index + 1;
+          if (index === 0) rankContent = '<span class="rank-medal" title="Gold">🥇</span>';
+          else if (index === 1) rankContent = '<span class="rank-medal" title="Silver">🥈</span>';
+          else if (index === 2) rankContent = '<span class="rank-medal" title="Bronze">🥉</span>';
+
+          tr.innerHTML = 
+            '<td>' + rankContent + '</td>' +
+            '<td>' +
+              '<div class="player-col-name">' +
+                '<span>' + escapeHtml(item.name) + (isCurrent ? ' <small style="color:var(--color-blue-accent); font-weight:800;">(You)</small>' : '') + '</span>' +
+                '<span class="player-col-unit">' + escapeHtml(item.unit) + ' • ' + escapeHtml(item.date || "HQ Shift") + '</span>' +
+              '</div>' +
+            '</td>' +
+            '<td><span class="score-col-val">' + item.score + ' / ' + scenarios.length + '</span></td>';
+
+          tbodyElem.appendChild(tr);
+        });
+      }
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>"']/g, function (m) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+        });
+      }
+
+      // Start Shift
+      function startGame() {
+        var rawName = (playerNameInput.value || "").trim();
+        currentPlayerName = rawName.length > 0 ? rawName : "Kansanga Defender";
+        
+        var genderIcon = (selectedGender === "female") ? "👩 " : "👨 ";
+        activePlayerTag.textContent = genderIcon + currentPlayerName + " (" + currentDepartment + ")";
+
+        currentIndex = 0;
+        score = 0;
+        answered = false;
+
+        startScreen.classList.add("hidden");
+        endScreen.classList.add("hidden");
+        quizScreen.classList.remove("hidden");
+
+        playTone("click");
+
+        // Automatically start the Sci-Fi Cyber Music soundtrack
+        if (!musicPlaying) {
+          startCyberMusic();
+        }
+
+        // Trigger Gender-Specific Welcome Voiceover!
+        playWelcomeVoiceover(selectedGender, currentPlayerName, false);
+
+        renderScenario();
+      }
+
+      // Render Current Scenario
+      function renderScenario() {
+        answered = false;
+        var current = scenarios[currentIndex];
+
+        // Update Counter & Score
+        scenarioCountText.textContent = "Scenario " + (currentIndex + 1) + " of " + scenarios.length;
+        currentScoreSpan.textContent = score;
+        if (totalScenariosSpan) {
+          totalScenariosSpan.textContent = scenarios.length;
+        }
+
+        // Progress fill percentage
+        var percent = ((currentIndex) / scenarios.length) * 100;
+        progressBar.style.width = percent + "%";
+
+        // Title and Prompt
+        scenarioTitle.textContent = current.title;
+        scenarioText.textContent = current.text;
+
+        // Reset Feedback and Next button
+        feedbackBox.classList.add("hidden");
+        feedbackBox.className = "feedback-box hidden";
+        nextBtn.classList.add("hidden");
+
+        // Clear and Render 4 Option Buttons
+        optionsContainer.innerHTML = "";
+        var prefixes = ["A", "B", "C", "D"];
+
+        current.options.forEach(function (optText, idx) {
+          var optionNum = idx + 1; // 1-indexed
+
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "option-btn";
+          btn.setAttribute("data-option-num", optionNum);
+          btn.setAttribute("aria-label", "Option " + prefixes[idx] + ": " + optText);
+
+          var prefixSpan = document.createElement("span");
+          prefixSpan.className = "option-prefix";
+          prefixSpan.textContent = prefixes[idx];
+
+          var textSpan = document.createElement("span");
+          textSpan.className = "option-text";
+          textSpan.textContent = optText;
+
+          btn.appendChild(prefixSpan);
+          btn.appendChild(textSpan);
+
+          btn.addEventListener("click", function () {
+            handleOptionSelect(optionNum);
+          });
+
+          optionsContainer.appendChild(btn);
+        });
+      }
+
+      // Handle Option Selection
+      function handleOptionSelect(selectedOptionNum) {
+        if (answered) return;
+        answered = true;
+
+        var current = scenarios[currentIndex];
+        var isCorrect = (selectedOptionNum === current.correctAnswer);
+
+        if (isCorrect) {
+          score += 1;
+          playTone("correct");
+        } else {
+          playTone("incorrect");
+        }
+
+        // Live score display update
+        currentScoreSpan.textContent = score;
+
+        // Disable all buttons immediately and highlight
+        var optionButtons = optionsContainer.querySelectorAll(".option-btn");
+        optionButtons.forEach(function (btn) {
+          btn.disabled = true;
+          var num = parseInt(btn.getAttribute("data-option-num"), 10);
+
+          if (num === current.correctAnswer) {
+            btn.classList.add("correct");
+          } else if (num === selectedOptionNum && !isCorrect) {
+            btn.classList.add("incorrect");
+          }
+        });
+
+        // Update & show inline feedback box
+        if (isCorrect) {
+          feedbackBox.className = "feedback-box correct";
+          feedbackIcon.innerHTML = checkIconSvg;
+          feedbackMessage.textContent = current.feedback;
+        } else {
+          feedbackBox.className = "feedback-box incorrect";
+          feedbackIcon.innerHTML = xIconSvg;
+          feedbackMessage.textContent = "Incorrect. " + current.feedback;
+        }
+        feedbackBox.classList.remove("hidden");
+
+        // Unhide Next Scenario button
+        nextBtn.classList.remove("hidden");
+        nextBtn.focus();
+      }
+
+      // Advance to Next Scenario or End Screen
+      function handleNextScenario() {
+        playTone("click");
+        if (currentIndex < scenarios.length - 1) {
+          currentIndex += 1;
+          renderScenario();
+        } else {
+          showEndScreen();
+        }
+      }
+
+      // Show End Screen
+      function showEndScreen() {
+        quizScreen.classList.add("hidden");
+        endScreen.classList.remove("hidden");
+
+        progressBar.style.width = "100%";
+        finalScoreDisplay.textContent = score + " / " + scenarios.length;
+
+        resultBadge.className = "result-badge-wrap";
+        performanceTitle.className = "performance-title";
+
+        var championThreshold = Math.round(scenarios.length * 0.9); // e.g. 9 or 10 out of 10
+        var solidThreshold = Math.round(scenarios.length * 0.6); // e.g. 6 to 8 out of 10
+
+        if (score >= championThreshold) {
+          resultBadge.classList.add("champion");
+          resultBadge.innerHTML = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' + shieldChampionSvg + '</svg>';
+          performanceTitle.classList.add("champion");
+          performanceTitle.textContent = "Cyber Security Champion";
+          tailoredFeedbackText.textContent = "Outstanding vigilance! You successfully intercepted all key workplace threat vectors, from fake WhatsApp messages and phone scams to tailgating and rogue USBs. Kansanga HQ and our clients are secure under your watch.";
+          playTone("celebration");
+          launchConfetti();
+        } else if (score >= solidThreshold) {
+          resultBadge.classList.add("solid");
+          resultBadge.innerHTML = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' + shieldSolidSvg + '</svg>';
+          performanceTitle.classList.add("solid");
+          performanceTitle.textContent = "Solid Defender";
+          tailoredFeedbackText.textContent = "Good defensive awareness! You recognized the majority of everyday threats. Remember to always lock your screen, avoid unverified public Wi-Fi, and double-check unexpected attachments to keep our defenses airtight.";
+          playTone("correct");
+        } else {
+          resultBadge.classList.add("breach");
+          resultBadge.innerHTML = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' + shieldBreachSvg + '</svg>';
+          performanceTitle.classList.add("breach");
+          performanceTitle.textContent = "Security Breach";
+          tailoredFeedbackText.textContent = "Security alert! Multiple everyday security risks slipped through. Remember: never share passwords, always lock your screen when stepping away, avoid plugging in strange USB drives, and verify urgent requests with IT (0800 220 580).";
+          playTone("incorrect");
+        }
+
+        // Add user score to leaderboard
+        var board = getStoredLeaderboard();
+        var existingIdx = -1;
+        for (var i = 0; i < board.length; i++) {
+          if (board[i].name === currentPlayerName) {
+            existingIdx = i;
+            break;
+          }
+        }
+        var newRecord = {
+          name: currentPlayerName,
+          unit: currentDepartment,
+          score: score,
+          date: "Just Now"
+        };
+        if (existingIdx >= 0) {
+          if (score >= board[existingIdx].score) {
+            board[existingIdx] = newRecord;
+          }
+        } else {
+          board.push(newRecord);
+        }
+        board.sort(function (a, b) { return b.score - a.score; });
+        saveLeaderboard(board);
+
+        // Find user rank
+        var userRank = 1;
+        for (var j = 0; j < board.length; j++) {
+          if (board[j].name === currentPlayerName) {
+            userRank = j + 1;
+            break;
+          }
+        }
+        playerRankBadge.textContent = "Your Rank: #" + userRank + " of " + board.length;
+
+        // Render Leaderboard on End Screen
+        renderLeaderboardInto(leaderboardTbody, currentPlayerName);
+
+        playAgainBtn.focus();
+      }
+
+      // In-Game / Start-Screen Leaderboard Modal Controls
+      function openLeaderboardModal() {
+        playTone("click");
+        renderLeaderboardInto(modalLeaderboardTbody, currentPlayerName);
+        leaderboardModal.classList.remove("hidden");
+      }
+
+      function closeLeaderboardModal() {
+        playTone("click");
+        leaderboardModal.classList.add("hidden");
+      }
+
+      // Event Listeners
+      if (musicToggleBtn) {
+        musicToggleBtn.addEventListener("click", function () {
+          toggleCyberMusic();
+        });
+      }
+
+      startBtn.addEventListener("click", startGame);
+      nextBtn.addEventListener("click", handleNextScenario);
+      playAgainBtn.addEventListener("click", startGame);
+
+      viewLeaderboardStartBtn.addEventListener("click", openLeaderboardModal);
+      openLeaderboardHeaderBtn.addEventListener("click", openLeaderboardModal);
+      closeLeaderboardModalBtn.addEventListener("click", closeLeaderboardModal);
+
+      leaderboardModal.addEventListener("click", function (e) {
+        if (e.target === leaderboardModal) {
+          closeLeaderboardModal();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !leaderboardModal.classList.contains("hidden")) {
+          closeLeaderboardModal();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
