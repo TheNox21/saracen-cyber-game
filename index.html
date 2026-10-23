@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saracen Cyber Defender: Kansanga HQ Edition | Saracen Uganda Ltd</title>
-  <meta name="description" content="Cyber Awareness Month interactive quiz and live leaderboard for Saracen Uganda Ltd." />
+  <meta name="description" content="Cyber Awareness Month interactive quiz, department statistics dashboard, and live leaderboard for Saracen Uganda Ltd." />
   <meta property="og:title" content="Saracen Cyber Defender: Kansanga HQ Edition" />
   <meta property="og:description" content="Test your cybersecurity instincts for Cyber Awareness Month — October." />
   <meta property="og:type" content="website" />
@@ -98,7 +98,7 @@
     }
 
     /* =========================================================
-       DISTINCT THEME HEADER BANNER (Responsive Mobile / Tablet / Desktop)
+       DISTINCT THEME HEADER BANNER (Responsive)
        ========================================================= */
     .theme-banner {
       width: 100%;
@@ -167,8 +167,11 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .banner-btn:active {
-      transform: translateY(0);
+    .banner-btn.active-tab {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--color-navy);
+      border-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     /* Equalizer Wave Bars for Sci-Fi Cyber Music */
@@ -210,7 +213,7 @@
        ========================================================= */
     .game-wrapper {
       width: 100%;
-      max-width: 860px;
+      max-width: 880px;
       padding: 24px 18px;
       display: flex;
       flex-direction: column;
@@ -237,7 +240,6 @@
       position: relative;
     }
 
-    /* Scanning radar emblem */
     .emblem-wrapper {
       position: relative;
       width: 52px;
@@ -367,7 +369,7 @@
       border: 1px solid #bfdbfe;
       padding: 6px 12px;
       border-radius: 8px;
-      max-width: 220px;
+      max-width: 250px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -408,7 +410,7 @@
     }
 
     /* =========================================================
-       VOICE DISPATCH BANNER (Speech Synthesis UI + Waveform)
+       VOICE DISPATCH BANNER (Realistic AI Speech UI)
        ========================================================= */
     .voice-dispatch-banner {
       background: linear-gradient(90deg, #021e38 0%, #003057 60%, #0b3d68 100%);
@@ -421,7 +423,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.22);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.25);
       animation: slideUp 0.3s ease-out;
     }
 
@@ -720,7 +722,7 @@
       border-radius: 12px;
       padding: 14px 22px;
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -737,7 +739,7 @@
     }
 
     /* =========================================================
-       START SCREEN & PLAYER PROFILE INPUTS
+       START SCREEN & MANDATORY PLAYER PROFILE INPUTS
        ========================================================= */
     .start-screen {
       text-align: center;
@@ -776,9 +778,26 @@
       color: var(--color-gray-600);
       line-height: 1.6;
       margin-bottom: 24px;
-      max-width: 620px;
+      max-width: 640px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    /* Validation Alert Box */
+    .validation-error-box {
+      background: #fdf2f2;
+      border: 2px solid var(--color-crimson);
+      color: var(--color-crimson);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      animation: slideUp 0.2s ease-out;
     }
 
     /* Player Profile Setup Box */
@@ -791,28 +810,53 @@
       text-align: left;
     }
 
-    .player-setup-box .setup-label {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--color-navy);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .player-input-row {
-      display: flex;
-      gap: 10px;
+    .input-grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
       margin-bottom: 16px;
     }
 
-    .player-name-input {
-      flex-grow: 1;
-      padding: 12px 16px;
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .setup-label {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .required-star {
+      color: var(--color-crimson);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .compulsory-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      background: #fee2e2;
+      color: var(--color-crimson);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      letter-spacing: normal;
+    }
+
+    .player-text-input {
+      width: 100%;
+      padding: 12px 14px;
       border: 2px solid #cbd5e1;
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-family: inherit;
       color: var(--color-navy);
       font-weight: 600;
@@ -821,9 +865,15 @@
       background: var(--color-white);
     }
 
-    .player-name-input:focus {
+    .player-text-input:focus {
       border-color: var(--color-blue-accent);
       box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+    }
+
+    .player-text-input.input-error {
+      border-color: var(--color-crimson) !important;
+      background: #fff8f8;
+      box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.2) !important;
     }
 
     /* Department Tags */
@@ -859,9 +909,7 @@
       box-shadow: 0 2px 6px rgba(0, 48, 87, 0.25);
     }
 
-    /* =========================================================
-       GENDER / VOICE SELECTION SECTION
-       ========================================================= */
+    /* Gender / Voice Selection */
     .gender-selection-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1002,6 +1050,160 @@
       font-weight: 500;
     }
 
+    .voice-engine-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    /* =========================================================
+       DEPARTMENT STATS & ANALYTICS MODAL & DASHBOARD
+       ========================================================= */
+    .stats-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stats-kpi-card {
+      background: #f8fafc;
+      border: 1px solid var(--color-ice-blue-border);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    .stats-kpi-val {
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: var(--color-navy);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stats-kpi-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-gray-600);
+      margin-top: 4px;
+    }
+
+    .stats-table-wrapper {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .dept-rank-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .dept-rank-table th {
+      background: #eff6ff;
+      color: var(--color-navy);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 2px solid #bfdbfe;
+    }
+
+    .dept-rank-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #ffffff;
+      vertical-align: middle;
+    }
+
+    .dept-rank-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .dept-name-cell {
+      font-weight: 700;
+      color: var(--color-navy);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .score-progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-width: 110px;
+    }
+
+    .score-progress-bar {
+      flex-grow: 1;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .score-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .score-progress-fill.high {
+      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    }
+
+    .score-progress-fill.medium {
+      background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%);
+    }
+
+    .score-progress-fill.low {
+      background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .dept-status-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dept-status-badge.leader {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+
+    .dept-status-badge.solid {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #7dd3fc;
+    }
+
+    .dept-status-badge.review {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
     /* =========================================================
        END SCREEN
        ========================================================= */
@@ -1089,7 +1291,7 @@
       border: 2px solid var(--color-ice-blue-border);
       border-radius: 16px;
       padding: 20px;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
       text-align: left;
     }
 
@@ -1199,7 +1401,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* Modal for In-Game Live Leaderboard */
+    /* Modal for In-Game Live Leaderboard & Department Stats */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -1220,7 +1422,7 @@
       background: var(--color-white);
       border-radius: 18px;
       width: 100%;
-      max-width: 620px;
+      max-width: 680px;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
@@ -1325,9 +1527,7 @@
       display: none !important;
     }
 
-    /* =========================================================
-       ANIMATIONS
-       ========================================================= */
+    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -1339,51 +1539,27 @@
     }
 
     @keyframes correctPop {
-      0% {
-        transform: scale(1);
-      }
-      40% {
-        transform: scale(1.025) translateY(-2px);
-      }
-      100% {
-        transform: scale(1) translateY(0);
-      }
+      0% { transform: scale(1); }
+      40% { transform: scale(1.025) translateY(-2px); }
+      100% { transform: scale(1) translateY(0); }
     }
 
     @keyframes badgeCheckSpin {
-      0% {
-        transform: scale(0.8) rotate(-15deg);
-      }
-      60% {
-        transform: scale(1.18) rotate(6deg);
-      }
-      100% {
-        transform: scale(1) rotate(0deg);
-      }
+      0% { transform: scale(0.8) rotate(-15deg); }
+      60% { transform: scale(1.18) rotate(6deg); }
+      100% { transform: scale(1) rotate(0deg); }
     }
 
     @keyframes incorrectShake {
-      0%, 100% {
-        transform: translateX(0);
-      }
-      15%, 55%, 85% {
-        transform: translateX(-6px);
-      }
-      35%, 70% {
-        transform: translateX(6px);
-      }
+      0%, 100% { transform: translateX(0); }
+      15%, 55%, 85% { transform: translateX(-6px); }
+      35%, 70% { transform: translateX(6px); }
     }
 
     @keyframes badgeShudder {
-      0%, 100% {
-        transform: scale(1);
-      }
-      30% {
-        transform: scale(0.9) rotate(-10deg);
-      }
-      70% {
-        transform: scale(1.1) rotate(10deg);
-      }
+      0%, 100% { transform: scale(1); }
+      30% { transform: scale(0.9) rotate(-10deg); }
+      70% { transform: scale(1.1) rotate(10deg); }
     }
 
     #nextBtn:not(.hidden) {
@@ -1391,20 +1567,11 @@
     }
 
     @keyframes nextBtnPop {
-      0% {
-        opacity: 0;
-        transform: translateY(10px) scale(0.96);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translateY(10px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* =========================================================
-       RESPONSIVE DESIGN (Mobile, Tablet, Desktop)
-       ========================================================= */
-    /* Tablets (up to 768px) */
+    /* Responsive Design (Mobile / Tablet / Desktop) */
     @media (max-width: 768px) {
       .theme-banner-inner {
         flex-direction: column;
@@ -1419,7 +1586,7 @@
         padding: 18px 14px;
       }
       .game-card {
-        padding: 26px 22px;
+        padding: 26px 20px;
         border-radius: 18px;
       }
       .company-title {
@@ -1427,7 +1594,20 @@
       }
     }
 
-    /* Mobile Phones (up to 480px) */
+    @media (max-width: 580px) {
+      .input-grid-two {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .gender-selection-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .stats-kpi-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media (max-width: 480px) {
       .theme-banner {
         padding: 8px 10px;
@@ -1439,17 +1619,17 @@
       .theme-banner-actions {
         width: 100%;
         justify-content: center;
-        gap: 6px;
+        gap: 5px;
       }
       .banner-btn {
-        padding: 5px 9px;
+        padding: 5px 8px;
         font-size: 0.72rem;
       }
       .game-wrapper {
         padding: 12px 10px;
       }
       .game-card {
-        padding: 20px 15px;
+        padding: 20px 14px;
         border-radius: 16px;
         border-top-width: 4px;
       }
@@ -1458,48 +1638,32 @@
         height: 44px;
       }
       .company-title {
-        font-size: 1.25rem;
+        font-size: 1.22rem;
       }
       .branch-sub {
-        font-size: 0.76rem;
+        font-size: 0.74rem;
       }
       .game-hero-title {
-        font-size: 1.45rem;
+        font-size: 1.4rem;
       }
       .welcome-text {
-        font-size: 0.94rem;
-        margin-bottom: 18px;
+        font-size: 0.92rem;
+        margin-bottom: 16px;
       }
       .player-setup-box {
-        padding: 16px 14px;
-      }
-      .gender-selection-row {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-      .gender-card-btn {
-        padding: 10px 12px;
-      }
-      .gender-card-avatar {
-        width: 34px;
-        height: 34px;
+        padding: 15px 12px;
       }
       .scenario-title {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
       }
       .scenario-text {
-        font-size: 0.98rem;
-        padding: 14px 14px;
+        font-size: 0.96rem;
+        padding: 13px 13px;
       }
       .option-btn {
         padding: 13px 14px;
-        font-size: 0.94rem;
-        gap: 12px;
-      }
-      .option-prefix {
-        width: 28px;
-        height: 28px;
-        font-size: 0.82rem;
+        font-size: 0.92rem;
+        gap: 10px;
       }
       .voice-dispatch-banner {
         flex-direction: column;
@@ -1514,10 +1678,10 @@
         font-size: 2.5rem;
       }
       .performance-title {
-        font-size: 1.45rem;
+        font-size: 1.4rem;
       }
       .site-footer {
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         padding: 16px 10px;
       }
     }
@@ -1554,6 +1718,27 @@
       </div>
 
       <div class="theme-banner-actions">
+        <button id="openStatsHeaderBtn" class="banner-btn" type="button" aria-label="Open Department Statistics Dashboard">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span>Department Stats</span>
+        </button>
+
+        <button id="openLeaderboardHeaderBtn" class="banner-btn" type="button" aria-label="Open Live Leaderboard">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+          </svg>
+          <span>HQ Leaderboard</span>
+        </button>
+
         <button id="musicToggleBtn" class="banner-btn" type="button" aria-label="Toggle Sci-Fi Cyber Music">
           <span class="music-wave-bars" id="musicBars" aria-hidden="true">
             <span class="bar bar-1"></span>
@@ -1564,23 +1749,11 @@
         </button>
 
         <button id="soundToggleBtn" class="banner-btn" type="button" aria-label="Toggle Sound Effects">
-          <svg id="soundIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg id="soundIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
           </svg>
           <span id="soundText">SFX ON</span>
-        </button>
-
-        <button id="openLeaderboardHeaderBtn" class="banner-btn" type="button" aria-label="Open Live Leaderboard">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-            <path d="M4 22h16"></path>
-            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-          </svg>
-          <span>HQ Leaderboard</span>
         </button>
       </div>
     </div>
@@ -1625,17 +1798,44 @@
 
         <h2 class="game-hero-title">Saracen Cyber Defender: Kansanga HQ Edition</h2>
         <p class="welcome-text">
-          Defend Saracen Uganda's critical systems, client data, and premises. Take on 10 everyday workplace threat scenarios and see where your unit ranks on the Kansanga HQ Live Leaderboard!
+          Defend Saracen Uganda's critical systems, client records, and premises. Test your instincts across 10 everyday threat scenarios and compare departmental defense performance live!
         </p>
 
-        <!-- Player Profile & Voice Dispatch Setup -->
+        <!-- Validation Error Alert (Shown if Name or Staff ID is missing) -->
+        <div id="validationErrorBox" class="validation-error-box hidden" role="alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span id="validationErrorMsg">Both Defender Full Name and Staff ID Number are compulsory to start the quiz.</span>
+        </div>
+
+        <!-- Player Profile & Compulsory Credentials Box -->
         <div class="player-setup-box">
-          <label class="setup-label" for="playerNameInput">Defender Name / Staff ID (For Live Leaderboard):</label>
-          <div class="player-input-row">
-            <input type="text" id="playerNameInput" class="player-name-input" placeholder="e.g., Patrick M. or Shift Patrol 1" maxlength="24" value="Kansanga Defender" />
+          <div class="input-grid-two">
+            <div class="field-group">
+              <label class="setup-label" for="playerNameInput">
+                <span>Defender Full Name</span>
+                <span class="required-star">*</span>
+                <span class="compulsory-badge">Compulsory</span>
+              </label>
+              <input type="text" id="playerNameInput" class="player-text-input" placeholder="e.g., Patrick Mugisha" maxlength="32" autocomplete="name" />
+            </div>
+
+            <div class="field-group">
+              <label class="setup-label" for="staffIdInput">
+                <span>Staff ID Number</span>
+                <span class="required-star">*</span>
+                <span class="compulsory-badge">Compulsory</span>
+              </label>
+              <input type="text" id="staffIdInput" class="player-text-input" placeholder="e.g., 10482 or 58291" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="off" />
+            </div>
           </div>
 
-          <label class="setup-label">Select Department / Station:</label>
+          <label class="setup-label" style="margin-bottom:8px;">
+            <span>Select Your Department / Station:</span>
+          </label>
           <div class="unit-tags-row" id="unitTagsContainer">
             <button type="button" class="unit-tag-btn active" data-unit="Operations">Operations</button>
             <button type="button" class="unit-tag-btn" data-unit="Control Room">Control Room</button>
@@ -1648,10 +1848,13 @@
             <button type="button" class="unit-tag-btn" data-unit="Human Resources">Human Resources</button>
           </div>
 
-          <!-- Gender & Voice Dispatch Selection -->
-          <label class="setup-label">Select Officer Profile & Voice Dispatch Greeting:</label>
+          <!-- Realistic Voice & Officer Profile Selection -->
+          <label class="setup-label" style="margin-bottom:8px;">
+            <span>Select Officer Profile & Voice Dispatch:</span>
+            <span class="voice-engine-badge">Studio AI Voice</span>
+          </label>
           <div class="gender-selection-row" id="genderSelectionContainer">
-            <button type="button" class="gender-card-btn active" data-gender="male" id="genderMaleBtn" aria-label="Select Male Defender with Male Voiceover">
+            <button type="button" class="gender-card-btn active" data-gender="male" id="genderMaleBtn" aria-label="Select Male Defender with Realistic Male Voiceover">
               <div class="gender-card-avatar" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -1660,14 +1863,14 @@
               </div>
               <div class="gender-card-info">
                 <span class="gender-card-title">Male Officer</span>
-                <span class="gender-card-sub">Male Voice Dispatch</span>
+                <span class="gender-card-sub">Realistic Studio Voice (Puck)</span>
               </div>
               <div class="gender-check-indicator" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
             </button>
 
-            <button type="button" class="gender-card-btn" data-gender="female" id="genderFemaleBtn" aria-label="Select Female Defender with Female Voiceover">
+            <button type="button" class="gender-card-btn" data-gender="female" id="genderFemaleBtn" aria-label="Select Female Defender with Realistic Female Voiceover">
               <div class="gender-card-avatar female" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -1676,7 +1879,7 @@
               </div>
               <div class="gender-card-info">
                 <span class="gender-card-title">Female Officer</span>
-                <span class="gender-card-sub">Female Voice Dispatch</span>
+                <span class="gender-card-sub">Realistic Studio Voice (Kore)</span>
               </div>
               <div class="gender-check-indicator" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1690,29 +1893,41 @@
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                 <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
               </svg>
-              <span>Test Voice Greeting (<span id="activeGenderLabel">Male Voice</span>)</span>
+              <span id="previewVoiceBtnText">Preview Realistic Voice (<span id="activeGenderLabel">Male Voice</span>)</span>
             </button>
-            <span class="voice-note-hint">Plays automatically upon starting your shift</span>
+            <span class="voice-note-hint">Plays lifelike human audio when starting your quiz</span>
           </div>
         </div>
 
+        <!-- Primary Start Quiz Button -->
         <button id="startBtn" class="primary-btn" type="button">
-          <span>Start Your Shift</span>
+          <span>Start Your Quiz</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"/>
             <polyline points="12 5 19 12 12 19"/>
           </svg>
         </button>
 
-        <button id="viewLeaderboardStartBtn" class="secondary-btn" type="button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-            <path d="M4 22h16"></path>
-            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-          </svg>
-          <span>View Live Kansanga HQ Leaderboard</span>
-        </button>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;">
+          <button id="viewStatsStartBtn" class="secondary-btn" type="button" style="flex:1; min-width:230px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Department Stats & Rankings</span>
+          </button>
+
+          <button id="viewLeaderboardStartBtn" class="secondary-btn" type="button" style="flex:1; min-width:230px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+            </svg>
+            <span>Live Kansanga HQ Leaderboard</span>
+          </button>
+        </div>
       </div>
 
       <!-- ================= 2. QUIZ SCREEN ================= -->
@@ -1727,8 +1942,8 @@
               <span class="vbar vbar-4"></span>
             </div>
             <div class="voice-dispatch-content">
-              <div class="voice-dispatch-tag" id="voiceDispatchTag">🎙️ Kansanga HQ Voice Dispatch (Male Officer)</div>
-              <div class="voice-dispatch-text" id="voiceDispatchText">"Welcome to Saracen Cyber Defender, Officer Kansanga Defender. Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your shift!"</div>
+              <div class="voice-dispatch-tag" id="voiceDispatchTag">🎙️ Kansanga HQ Voice Dispatch (Realistic Studio Voice)</div>
+              <div class="voice-dispatch-text" id="voiceDispatchText">"Welcome to Saracen Cyber Defender, Officer Kansanga Defender. Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your quiz!"</div>
             </div>
           </div>
           <button type="button" class="voice-replay-btn" id="replayVoiceBtn" title="Replay Welcome Dispatch">
@@ -1834,7 +2049,7 @@
             <thead>
               <tr>
                 <th scope="col" style="text-align:center;">#</th>
-                <th scope="col">Defender / Unit</th>
+                <th scope="col">Defender & Staff ID / Unit</th>
                 <th scope="col" style="text-align:right;">Score</th>
               </tr>
             </thead>
@@ -1844,18 +2059,104 @@
           </table>
         </div>
 
-        <button id="playAgainBtn" class="primary-btn" type="button">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="1 4 1 10 7 10"/>
-            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
-          </svg>
-          <span>Retake Security Shift</span>
-        </button>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <button id="viewStatsEndBtn" class="secondary-btn" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>View Department Statistics & Standings</span>
+          </button>
+
+          <button id="playAgainBtn" class="primary-btn" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="1 4 1 10 7 10"/>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+            </svg>
+            <span>Retake Quiz / Start New Attempt</span>
+          </button>
+        </div>
       </div>
 
     </section>
 
-    <!-- Modal for In-Game / Start-Screen Leaderboard View -->
+    <!-- =========================================================
+         MODAL 1: DEPARTMENT STATISTICS & PARTICIPATION DASHBOARD
+         ========================================================= -->
+    <div id="statsModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="statsModalTitle">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="statsModalTitle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Department Participation & Performance</span>
+          </h3>
+          <button class="modal-close-btn" id="closeStatsModalBtn" type="button" aria-label="Close statistics modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:0.9rem; color:var(--color-gray-600); margin-bottom:14px;">
+            Comparative analysis of cybersecurity test performance and staff participation across all Kansanga HQ departments:
+          </p>
+
+          <!-- KPI Cards -->
+          <div class="stats-kpi-grid">
+            <div class="stats-kpi-card">
+              <div class="stats-kpi-val" id="statKpiParticipants">0</div>
+              <div class="stats-kpi-label">Staff Tested</div>
+            </div>
+            <div class="stats-kpi-card">
+              <div class="stats-kpi-val" id="statKpiTopDept" style="font-size:1.15rem; color:var(--color-blue-accent);">-</div>
+              <div class="stats-kpi-label">Top Department</div>
+            </div>
+            <div class="stats-kpi-card">
+              <div class="stats-kpi-val" id="statKpiAvgScore">0.0</div>
+              <div class="stats-kpi-label">HQ Average Score</div>
+            </div>
+            <div class="stats-kpi-card">
+              <div class="stats-kpi-val" id="statKpiPassRate">0%</div>
+              <div class="stats-kpi-label">Pass / Solid Defense</div>
+            </div>
+          </div>
+
+          <!-- Department Comparative Rankings Table -->
+          <h4 style="font-size:0.96rem; font-weight:800; color:var(--color-navy); margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+            <span>Department Performance Ranking (Score Comparison):</span>
+          </h4>
+          <div class="stats-table-wrapper">
+            <table class="dept-rank-table" aria-label="Department Performance Comparison">
+              <thead>
+                <tr>
+                  <th scope="col" style="width:40px; text-align:center;">#</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Staff Tested</th>
+                  <th scope="col">Avg Score (/10)</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="deptRankTbody">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Department Participation Share -->
+          <h4 style="font-size:0.96rem; font-weight:800; color:var(--color-navy); margin-bottom:10px;">
+            Participation Breakdown by Department:
+          </h4>
+          <div id="deptParticipationList" style="display:flex; flex-direction:column; gap:10px;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL 2: IN-GAME / START-SCREEN LEADERBOARD
+         ========================================================= -->
     <div id="leaderboardModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-card">
         <div class="modal-header">
@@ -1872,13 +2173,13 @@
         </div>
         <div class="modal-body">
           <p style="font-size:0.9rem; color:var(--color-gray-600); margin-bottom:14px;">
-            Live departmental scores for Saracen Uganda Ltd Cyber Awareness Month:
+            Live staff rankings for Saracen Uganda Ltd Cyber Awareness Month:
           </p>
           <table class="leaderboard-table">
             <thead>
               <tr>
                 <th scope="col" style="text-align:center;">#</th>
-                <th scope="col">Defender / Unit</th>
+                <th scope="col">Defender & Staff ID / Unit</th>
                 <th scope="col" style="text-align:right;">Score</th>
               </tr>
             </thead>
@@ -1898,7 +2199,7 @@
   </footer>
 
   <!-- =========================================================
-       GAME LOGIC & AUDIO SYNTHESIZERS
+       GAME LOGIC, REALISTIC VOICE ENGINE & DEPT STATS
        ========================================================= -->
   <script>
     (function () {
@@ -2038,22 +2339,35 @@
         }
       ];
 
-      // Default Pre-seeded Leaderboard for Kansanga HQ Staff (10-question scale)
+      // Default Pre-seeded Leaderboard with 5-digit Staff IDs (pure numbers)
       var defaultLeaderboard = [
-        { name: "Dennis O. (Shift Leader)", unit: "Operations", score: 10, date: "Today" },
-        { name: "Grace K. (Supervisor)", unit: "Control Room", score: 10, date: "Today" },
-        { name: "Samuel B. (Brand Lead)", unit: "Marketing", score: 9, date: "Today" },
-        { name: "David M. (Lead Systems)", unit: "Technical", score: 9, date: "Today" },
-        { name: "Aisha N. (Accounts)", unit: "Finance", score: 8, date: "Today" },
-        { name: "Ronald T. (Dispatch)", unit: "Logistics", score: 8, date: "Today" },
-        { name: "Joan K. (Compliance)", unit: "Legal", score: 8, date: "Today" },
-        { name: "Brian E. (Support Desk)", unit: "Customer Care", score: 7, date: "Today" },
-        { name: "Patricia M. (HR Lead)", unit: "Human Resources", score: 7, date: "Today" }
+        { name: "Dennis O. (Shift Leader)", staffId: "10482", unit: "Operations", score: 10, date: "Today" },
+        { name: "Grace K. (Supervisor)", staffId: "28491", unit: "Control Room", score: 10, date: "Today" },
+        { name: "Samuel B. (Brand Lead)", staffId: "39210", unit: "Marketing", score: 9, date: "Today" },
+        { name: "David M. (Lead Systems)", staffId: "45045", unit: "Technical", score: 9, date: "Today" },
+        { name: "Aisha N. (Accounts)", staffId: "18456", unit: "Finance", score: 8, date: "Today" },
+        { name: "Ronald T. (Dispatch)", staffId: "52890", unit: "Logistics", score: 8, date: "Today" },
+        { name: "Joan K. (Compliance)", staffId: "31102", unit: "Legal", score: 8, date: "Today" },
+        { name: "Brian E. (Support Desk)", staffId: "29988", unit: "Customer Care", score: 7, date: "Today" },
+        { name: "Patricia M. (HR Lead)", staffId: "16775", unit: "Human Resources", score: 7, date: "Today" }
       ];
+
+      // Default Pre-seeded Department Statistics Baseline for Kansanga HQ
+      var defaultDeptStats = {
+        "Operations": { participants: 14, totalScore: 130, passes: 13 },
+        "Control Room": { participants: 11, totalScore: 101, passes: 10 },
+        "Marketing": { participants: 8, totalScore: 70, passes: 7 },
+        "Technical": { participants: 10, totalScore: 86, passes: 9 },
+        "Finance": { participants: 9, totalScore: 75, passes: 8 },
+        "Logistics": { participants: 7, totalScore: 57, passes: 6 },
+        "Customer Care": { participants: 8, totalScore: 63, passes: 6 },
+        "Legal": { participants: 6, totalScore: 46, passes: 5 },
+        "Human Resources": { participants: 7, totalScore: 51, passes: 5 }
+      };
 
       function getStoredLeaderboard() {
         try {
-          var stored = localStorage.getItem("saracen_cyber_leaderboard_v5");
+          var stored = localStorage.getItem("saracen_cyber_leaderboard_v8");
           if (stored) {
             return JSON.parse(stored);
           }
@@ -2065,9 +2379,38 @@
 
       function saveLeaderboard(board) {
         try {
-          localStorage.setItem("saracen_cyber_leaderboard_v5", JSON.stringify(board));
+          localStorage.setItem("saracen_cyber_leaderboard_v8", JSON.stringify(board));
         } catch (e) {
           console.warn("Storage save error", e);
+        }
+      }
+
+      function getStoredDeptStats() {
+        try {
+          var stored = localStorage.getItem("saracen_dept_stats_v1");
+          if (stored) {
+            return JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn("Stats read error", e);
+        }
+        return JSON.parse(JSON.stringify(defaultDeptStats));
+      }
+
+      function recordDeptQuizResult(dept, finalScore) {
+        var stats = getStoredDeptStats();
+        if (!stats[dept]) {
+          stats[dept] = { participants: 0, totalScore: 0, passes: 0 };
+        }
+        stats[dept].participants += 1;
+        stats[dept].totalScore += finalScore;
+        if (finalScore >= 6) {
+          stats[dept].passes += 1;
+        }
+        try {
+          localStorage.setItem("saracen_dept_stats_v1", JSON.stringify(stats));
+        } catch (e) {
+          console.warn("Stats save error", e);
         }
       }
 
@@ -2076,39 +2419,27 @@
       var score = 0;
       var answered = false;
       var soundEnabled = true;
-      var currentPlayerName = "Kansanga Defender";
+      var currentPlayerName = "";
+      var currentStaffId = "";
       var currentDepartment = "Operations";
       var selectedGender = "male"; // "male" or "female"
 
-      // Audio Synthesizer & Sci-Fi Cyber Music Engine (Web Audio API - No external files needed!)
+      // Audio Synthesizer & Sci-Fi Cyber Music Engine
       var audioCtx = null;
       var musicPlaying = false;
       var musicGain = null;
       var musicInterval = null;
       var musicStep = 0;
+      var currentVoiceAudio = null;
+      var ttsAudioCache = {};
 
-      // Cyberpunk D-Minor Scale (Frequencies in Hz)
       var CYBER_NOTES = {
-        D1: 36.71,
-        D2: 73.42,
-        F2: 87.31,
-        G2: 98.00,
-        A2: 110.00,
-        C3: 130.81,
-        D3: 146.83,
-        F3: 174.61,
-        G3: 196.00,
-        A3: 220.00,
-        C4: 261.63,
-        D4: 293.66,
-        E4: 329.63,
-        F4: 349.23,
-        G4: 392.00,
-        A4: 440.00,
-        C5: 523.25
+        D1: 36.71, D2: 73.42, F2: 87.31, G2: 98.00, A2: 110.00,
+        C3: 130.81, D3: 146.83, F3: 174.61, G3: 196.00, A3: 220.00,
+        C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00,
+        A4: 440.00, C5: 523.25
       };
 
-      // 16-step Cyberpunk Bass & Arpeggio Sequences
       var cyberBassSeq = [
         CYBER_NOTES.D2, null, CYBER_NOTES.D2, null,
         CYBER_NOTES.F2, null, CYBER_NOTES.D2, null,
@@ -2138,7 +2469,6 @@
           musicGain = audioCtx.createGain();
           musicGain.gain.setValueAtTime(0.14, audioCtx.currentTime);
 
-          // Subtle stereo delay for atmospheric depth
           var delayNode = audioCtx.createDelay(0.5);
           delayNode.delayTime.value = 0.23;
           var feedbackNode = audioCtx.createGain();
@@ -2159,13 +2489,12 @@
         var step = musicStep % 16;
         musicStep++;
 
-        // 1. Cyber Sub-Bass Pulse (Warm resonant low-pass saw)
+        // Sub-Bass Pulse
         var bassFreq = cyberBassSeq[step];
         if (bassFreq) {
           var oscB = audioCtx.createOscillator();
           var filterB = audioCtx.createBiquadFilter();
           var gainB = audioCtx.createGain();
-
           oscB.type = "sawtooth";
           oscB.frequency.setValueAtTime(bassFreq, now);
 
@@ -2181,18 +2510,16 @@
           oscB.connect(filterB);
           filterB.connect(gainB);
           gainB.connect(musicGain);
-
           oscB.start(now);
           oscB.stop(now + 0.25);
         }
 
-        // 2. Cyber Arpeggio Note (Crisp, plucky cyber synth)
+        // Arpeggio
         var arpFreq = cyberArpSeq[step];
         if (arpFreq) {
           var oscA = audioCtx.createOscillator();
           var filterA = audioCtx.createBiquadFilter();
           var gainA = audioCtx.createGain();
-
           oscA.type = "triangle";
           oscA.frequency.setValueAtTime(arpFreq, now);
 
@@ -2206,16 +2533,12 @@
           oscA.connect(filterA);
           filterA.connect(gainA);
           gainA.connect(musicGain);
-
-          if (musicGain._delay) {
-            gainA.connect(musicGain._delay);
-          }
-
+          if (musicGain._delay) gainA.connect(musicGain._delay);
           oscA.start(now);
           oscA.stop(now + 0.17);
         }
 
-        // 3. Cyber Sub-Beat pulse on 0, 4, 8, 12
+        // Beat pulse
         if (step % 4 === 0) {
           var oscKick = audioCtx.createOscillator();
           var gainKick = audioCtx.createGain();
@@ -2227,7 +2550,6 @@
 
           oscKick.connect(gainKick);
           gainKick.connect(musicGain);
-
           oscKick.start(now);
           oscKick.stop(now + 0.17);
         }
@@ -2237,18 +2559,14 @@
         try {
           ensureAudioContext();
           initMusicGain();
-
           musicGain.gain.cancelScheduledValues(audioCtx.currentTime);
           musicGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
           musicGain.gain.linearRampToValueAtTime(0.14, audioCtx.currentTime + 1.2);
 
           musicPlaying = true;
           musicStep = 0;
-
           if (musicInterval) clearInterval(musicInterval);
-          // 124 BPM, 16th notes = ~121ms per step
           musicInterval = setInterval(playCyberMusicStep, 121);
-
           updateMusicUI(true);
         } catch (e) {
           console.warn("Audio autoplay blocked", e);
@@ -2273,11 +2591,8 @@
       }
 
       function toggleCyberMusic() {
-        if (musicPlaying) {
-          stopCyberMusic();
-        } else {
-          startCyberMusic();
-        }
+        if (musicPlaying) stopCyberMusic();
+        else startCyberMusic();
       }
 
       function updateMusicUI(isPlaying) {
@@ -2285,22 +2600,17 @@
         var musicText = document.getElementById("musicText");
         var musicToggleBtn = document.getElementById("musicToggleBtn");
         if (musicBars) {
-          if (isPlaying) {
-            musicBars.classList.add("playing");
-          } else {
-            musicBars.classList.remove("playing");
-          }
+          if (isPlaying) musicBars.classList.add("playing");
+          else musicBars.classList.remove("playing");
         }
-        if (musicText) {
-          musicText.textContent = isPlaying ? "Cyber Music: ON" : "Cyber Music: OFF";
-        }
+        if (musicText) musicText.textContent = isPlaying ? "Cyber Music: ON" : "Cyber Music: OFF";
         if (musicToggleBtn) {
           musicToggleBtn.style.background = isPlaying ? "rgba(2, 132, 199, 0.45)" : "rgba(255, 255, 255, 0.16)";
           musicToggleBtn.style.borderColor = isPlaying ? "#38bdf8" : "rgba(255, 255, 255, 0.35)";
         }
       }
 
-      // Security Radio Dispatch Chime (Two-tone high-tech beep)
+      // Security Radio Dispatch Chime
       function playDispatchChime() {
         if (!soundEnabled) return;
         try {
@@ -2309,7 +2619,7 @@
           var osc1 = audioCtx.createOscillator();
           var gain1 = audioCtx.createGain();
           osc1.type = "sine";
-          osc1.frequency.setValueAtTime(880, now); // A5
+          osc1.frequency.setValueAtTime(880, now);
           gain1.gain.setValueAtTime(0.12, now);
           gain1.gain.linearRampToValueAtTime(0.001, now + 0.12);
           osc1.connect(gain1);
@@ -2320,7 +2630,7 @@
           var osc2 = audioCtx.createOscillator();
           var gain2 = audioCtx.createGain();
           osc2.type = "sine";
-          osc2.frequency.setValueAtTime(1318.5, now + 0.11); // E6
+          osc2.frequency.setValueAtTime(1318.5, now + 0.11);
           gain2.gain.setValueAtTime(0.14, now + 0.11);
           gain2.gain.linearRampToValueAtTime(0.001, now + 0.28);
           osc2.connect(gain2);
@@ -2349,9 +2659,9 @@
             osc.stop(now + 0.08);
           } else if (type === "correct") {
             osc.type = "triangle";
-            osc.frequency.setValueAtTime(523.25, now); // C5
-            osc.frequency.setValueAtTime(659.25, now + 0.09); // E5
-            osc.frequency.setValueAtTime(783.99, now + 0.18); // G5
+            osc.frequency.setValueAtTime(523.25, now);
+            osc.frequency.setValueAtTime(659.25, now + 0.09);
+            osc.frequency.setValueAtTime(783.99, now + 0.18);
             gain.gain.setValueAtTime(0.12, now);
             gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
             osc.start(now);
@@ -2374,12 +2684,9 @@
             osc.start(now);
             osc.stop(now + 0.55);
           }
-        } catch (err) {
-          // Silent fallback if audio is blocked
-        }
+        } catch (err) {}
       }
 
-      // Confetti Effect Generator (Zero dependencies)
       function launchConfetti() {
         var canvas = document.getElementById("celebrationCanvas");
         if (!canvas) return;
@@ -2389,7 +2696,6 @@
 
         var pieces = [];
         var colors = ["#003057", "#0066cc", "#0284c7", "#E31837", "#ffffff", "#38bdf8"];
-
         for (var i = 0; i < 90; i++) {
           pieces.push({
             x: Math.random() * width,
@@ -2433,80 +2739,97 @@
       }
 
       // =========================================================
-      // GENDER-SPECIFIC VOICE OVER ENGINE (Web Speech API)
+      // REALISTIC VOICE SYNTHESIS ENGINE (Studio AI + Natural Fallback)
       // =========================================================
-      var availableVoices = [];
-
-      function populateVoices() {
-        if ("speechSynthesis" in window) {
-          availableVoices = window.speechSynthesis.getVoices() || [];
-        }
-      }
-
-      populateVoices();
-      if ("speechSynthesis" in window && window.speechSynthesis.onvoiceschanged !== undefined) {
-        window.speechSynthesis.onvoiceschanged = populateVoices;
-      }
-
-      function findVoiceForGender(gender) {
-        populateVoices();
-        if (!availableVoices || availableVoices.length === 0) return null;
-
-        var englishVoices = availableVoices.filter(function (v) {
-          return v.lang && v.lang.toLowerCase().indexOf("en") === 0;
-        });
-        var pool = englishVoices.length > 0 ? englishVoices : availableVoices;
-
-        var femaleKeywords = ["female", "samantha", "victoria", "zira", "karen", "susan", "serena", "stephanie", "tessa", "moira", "fiona", "ava", "allison", "jenny", "en-us-wavenet-c", "google uk english female"];
-        var maleKeywords = ["male", "david", "daniel", "george", "alex", "mark", "james", "richard", "oliver", "tom", "en-us-wavenet-d", "google uk english male", "guy"];
-
-        var keywords = (gender === "female") ? femaleKeywords : maleKeywords;
-
-        for (var i = 0; i < pool.length; i++) {
-          var vName = (pool[i].name || "").toLowerCase();
-          for (var k = 0; k < keywords.length; k++) {
-            if (vName.indexOf(keywords[k]) !== -1) {
-              return pool[i];
-            }
-          }
-        }
-
-        return pool[0];
-      }
-
       function setVoiceVisualizerState(isActive) {
         var wave = document.getElementById("voiceWaveVisualizer");
         if (wave) {
-          if (isActive) {
-            wave.classList.add("active");
-          } else {
-            wave.classList.remove("active");
-          }
+          if (isActive) wave.classList.add("active");
+          else wave.classList.remove("active");
         }
       }
 
-      function playWelcomeVoiceover(gender, defenderName, isPreview) {
-        var cleanName = (defenderName && defenderName.trim().length > 0) ? defenderName.trim() : "Defender";
-        
-        var message = "";
-        if (isPreview) {
-          message = (gender === "female")
-            ? "Female voice dispatch active. Welcome, Officer " + cleanName + ". Kansanga Headquarters is ready for your shift."
-            : "Male voice dispatch active. Welcome, Officer " + cleanName + ". Kansanga Headquarters is ready for your shift.";
-        } else {
-          message = (gender === "female")
-            ? "Welcome to Saracen Cyber Defender, Officer " + cleanName + ". Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your shift!"
-            : "Welcome to Saracen Cyber Defender, Officer " + cleanName + ". Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your shift!";
+      function stopCurrentVoice() {
+        if (currentVoiceAudio) {
+          try {
+            currentVoiceAudio.pause();
+            currentVoiceAudio.currentTime = 0;
+          } catch (e) {}
+          currentVoiceAudio = null;
+        }
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        setVoiceVisualizerState(false);
+      }
+
+      function speakNaturalBrowserFallback(gender, text) {
+        if (!("speechSynthesis" in window)) {
+          setVoiceVisualizerState(false);
+          return;
         }
 
-        // Update Voice Dispatch Banner Text
+        window.speechSynthesis.cancel();
+        var utterance = new SpeechSynthesisUtterance(text);
+        var voices = window.speechSynthesis.getVoices() || [];
+        var englishVoices = voices.filter(function (v) {
+          return v.lang && v.lang.toLowerCase().indexOf("en") === 0;
+        });
+        var pool = englishVoices.length > 0 ? englishVoices : voices;
+
+        // Prefer human-sounding natural neural voices over robotic standard voices
+        var femaleKeys = ["natural", "online", "google us english", "jenny", "aria", "samantha", "victoria", "karen", "zira"];
+        var maleKeys = ["natural", "online", "google uk english male", "guy", "ryan", "daniel", "alex", "david", "george"];
+        var targetKeys = (gender === "female") ? femaleKeys : maleKeys;
+
+        var chosenVoice = null;
+        for (var i = 0; i < pool.length; i++) {
+          var nameLow = (pool[i].name || "").toLowerCase();
+          for (var k = 0; k < targetKeys.length; k++) {
+            if (nameLow.indexOf(targetKeys[k]) !== -1) {
+              chosenVoice = pool[i];
+              break;
+            }
+          }
+          if (chosenVoice) break;
+        }
+
+        if (chosenVoice) utterance.voice = chosenVoice;
+
+        if (gender === "female") {
+          utterance.pitch = 1.08;
+          utterance.rate = 0.95;
+        } else {
+          utterance.pitch = 0.92;
+          utterance.rate = 0.94;
+        }
+
+        utterance.onstart = function () { setVoiceVisualizerState(true); };
+        utterance.onend = function () { setVoiceVisualizerState(false); };
+        utterance.onerror = function () { setVoiceVisualizerState(false); };
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      async function playRealisticVoice(gender, defenderName, isPreview) {
+        var cleanName = (defenderName && defenderName.trim().length > 0) ? defenderName.trim() : "Defender";
+        
+        var message = isPreview
+          ? ((gender === "female")
+              ? "Female voice dispatch active. Welcome, Officer " + cleanName + ". Kansanga Headquarters is ready for your quiz."
+              : "Male voice dispatch active. Welcome, Officer " + cleanName + ". Kansanga Headquarters is ready for your quiz.")
+          : ((gender === "female")
+              ? "Welcome to Saracen Cyber Defender, Officer " + cleanName + ". Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your quiz!"
+              : "Welcome to Saracen Cyber Defender, Officer " + cleanName + ". Kansanga Headquarters appreciates your vigilance. Stay alert, trust your instincts, and keep our systems safe. Good luck on your quiz!");
+
+        // Update UI Banner
         var dispatchTag = document.getElementById("voiceDispatchTag");
         var dispatchText = document.getElementById("voiceDispatchText");
         var dispatchBanner = document.getElementById("voiceDispatchBanner");
 
         if (dispatchTag) {
-          var officerType = (gender === "female") ? "Female Officer Voice" : "Male Officer Voice";
-          dispatchTag.textContent = "🎙️ Kansanga HQ Voice Dispatch (" + officerType + ")";
+          var voiceName = (gender === "female") ? "Female Officer • Kore" : "Male Officer • Puck";
+          dispatchTag.textContent = "🎙️ Kansanga HQ Voice Dispatch (" + voiceName + ")";
         }
         if (dispatchText) {
           dispatchText.textContent = '"' + message + '"';
@@ -2515,46 +2838,174 @@
           dispatchBanner.classList.remove("hidden");
         }
 
-        // Play security radio alert chime
+        // Stop prior voice and play radio chime
+        stopCurrentVoice();
         playDispatchChime();
+        setVoiceVisualizerState(true);
 
-        // Speak using SpeechSynthesis
-        if ("speechSynthesis" in window) {
-          try {
-            window.speechSynthesis.cancel(); // Stop prior speech
-            var utterance = new SpeechSynthesisUtterance(message);
-            var voice = findVoiceForGender(gender);
-            if (voice) {
-              utterance.voice = voice;
-            }
-
-            if (gender === "female") {
-              utterance.pitch = 1.18;
-              utterance.rate = 0.98;
-            } else {
-              utterance.pitch = 0.88;
-              utterance.rate = 0.96;
-            }
-
-            utterance.onstart = function () {
-              setVoiceVisualizerState(true);
-            };
-            utterance.onend = function () {
-              setVoiceVisualizerState(false);
-            };
-            utterance.onerror = function () {
-              setVoiceVisualizerState(false);
-            };
-
-            window.speechSynthesis.speak(utterance);
-          } catch (err) {
-            console.warn("Speech synthesis error", err);
-            setVoiceVisualizerState(false);
-          }
+        var previewBtnText = document.getElementById("previewVoiceBtnText");
+        var originalBtnLabel = previewBtnText ? previewBtnText.innerHTML : "";
+        if (isPreview && previewBtnText) {
+          previewBtnText.textContent = "Synthesizing Realistic Voice...";
         }
+
+        // 1. First attempt Gemini Studio AI Text-To-Speech from Express server
+        try {
+          var cacheKey = gender + "_" + (isPreview ? "p" : "f") + "_" + cleanName;
+          var audioUri = ttsAudioCache[cacheKey];
+
+          if (!audioUri) {
+            var response = await fetch("/api/tts", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ text: message, gender: gender })
+            });
+
+            if (response.ok) {
+              var payload = await response.json();
+              if (payload.audioBase64) {
+                audioUri = "data:" + (payload.mimeType || "audio/wav") + ";base64," + payload.audioBase64;
+                ttsAudioCache[cacheKey] = audioUri;
+              }
+            }
+          }
+
+          if (audioUri) {
+            var audio = new Audio(audioUri);
+            currentVoiceAudio = audio;
+            audio.onended = function () { setVoiceVisualizerState(false); };
+            audio.onerror = function () { setVoiceVisualizerState(false); };
+            if (isPreview && previewBtnText) previewBtnText.innerHTML = originalBtnLabel;
+            await audio.play();
+            return;
+          }
+        } catch (e) {
+          console.warn("Studio voice server call failed, playing high-grade natural fallback:", e);
+        }
+
+        if (isPreview && previewBtnText) previewBtnText.innerHTML = originalBtnLabel;
+
+        // 2. High-grade natural browser fallback if backend is unavailable
+        speakNaturalBrowserFallback(gender, message);
       }
 
-      // DOM Elements
+      // =========================================================
+      // DEPARTMENT PARTICIPATION & PERFORMANCE DASHBOARD LOGIC
+      // =========================================================
+      function renderDepartmentStatsDashboard() {
+        var stats = getStoredDeptStats();
+        var deptNames = Object.keys(stats);
+
+        var totalParticipants = 0;
+        var totalHQScore = 0;
+        var totalPasses = 0;
+
+        var deptList = deptNames.map(function (name) {
+          var d = stats[name];
+          var count = d.participants || 0;
+          var sum = d.totalScore || 0;
+          var passes = d.passes || 0;
+          var avg = count > 0 ? (sum / count) : 0;
+          var passRate = count > 0 ? Math.round((passes / count) * 100) : 0;
+
+          totalParticipants += count;
+          totalHQScore += sum;
+          totalPasses += passes;
+
+          return {
+            name: name,
+            participants: count,
+            avgScore: avg,
+            passRate: passRate
+          };
+        });
+
+        // Sort departments descending by Average Score
+        deptList.sort(function (a, b) {
+          if (b.avgScore !== a.avgScore) {
+            return b.avgScore - a.avgScore;
+          }
+          return b.participants - a.participants;
+        });
+
+        // Top Department
+        var topDept = deptList.length > 0 ? deptList[0] : null;
+        var hqAvgScore = totalParticipants > 0 ? (totalHQScore / totalParticipants).toFixed(1) : "0.0";
+        var hqPassRate = totalParticipants > 0 ? Math.round((totalPasses / totalParticipants) * 100) : 0;
+
+        // Update KPI Cards
+        document.getElementById("statKpiParticipants").textContent = totalParticipants;
+        document.getElementById("statKpiTopDept").textContent = topDept ? topDept.name + " (" + topDept.avgScore.toFixed(1) + ")" : "-";
+        document.getElementById("statKpiAvgScore").textContent = hqAvgScore + " / 10";
+        document.getElementById("statKpiPassRate").textContent = hqPassRate + "%";
+
+        // Render Comparative Table
+        var rankTbody = document.getElementById("deptRankTbody");
+        rankTbody.innerHTML = "";
+
+        deptList.forEach(function (dept, idx) {
+          var tr = document.createElement("tr");
+
+          var medalOrNum = idx + 1;
+          if (idx === 0) medalOrNum = '<span class="rank-medal" title="1st Place">🥇</span>';
+          else if (idx === 1) medalOrNum = '<span class="rank-medal" title="2nd Place">🥈</span>';
+          else if (idx === 2) medalOrNum = '<span class="rank-medal" title="3rd Place">🥉</span>';
+
+          var statusBadge = "";
+          var fillClass = "medium";
+          if (idx === 0 || dept.avgScore >= 9.0) {
+            statusBadge = '<span class="dept-status-badge leader">🛡️ Leading Unit</span>';
+            fillClass = "high";
+          } else if (dept.avgScore >= 7.8) {
+            statusBadge = '<span class="dept-status-badge solid">✓ Strong Defense</span>';
+            fillClass = "medium";
+          } else {
+            statusBadge = '<span class="dept-status-badge review">⚠️ Training Needed</span>';
+            fillClass = "low";
+          }
+
+          var percentWidth = Math.min(100, Math.round((dept.avgScore / 10) * 100));
+
+          tr.innerHTML = 
+            '<td style="text-align:center; font-weight:800;">' + medalOrNum + '</td>' +
+            '<td><div class="dept-name-cell"><span>' + escapeHtml(dept.name) + '</span></div></td>' +
+            '<td style="font-weight:700;">' + dept.participants + ' staff</td>' +
+            '<td>' +
+              '<div class="score-progress-wrap">' +
+                '<span style="font-weight:800; min-width:32px;">' + dept.avgScore.toFixed(1) + '</span>' +
+                '<div class="score-progress-bar"><div class="score-progress-fill ' + fillClass + '" style="width:' + percentWidth + '%;"></div></div>' +
+              '</div>' +
+            '</td>' +
+            '<td>' + statusBadge + '</td>';
+
+          rankTbody.appendChild(tr);
+        });
+
+        // Render Participation Breakdown
+        var partContainer = document.getElementById("deptParticipationList");
+        partContainer.innerHTML = "";
+
+        deptList.forEach(function (dept) {
+          var share = totalParticipants > 0 ? Math.round((dept.participants / totalParticipants) * 100) : 0;
+          var row = document.createElement("div");
+          row.style.cssText = "display:flex; flex-direction:column; gap:4px;";
+
+          row.innerHTML = 
+            '<div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:700;">' +
+              '<span>' + escapeHtml(dept.name) + '</span>' +
+              '<span style="color:var(--color-navy);">' + dept.participants + ' tested (' + share + '% of HQ)</span>' +
+            '</div>' +
+            '<div style="width:100%; height:7px; background:#e2e8f0; border-radius:999px; overflow:hidden;">' +
+              '<div style="height:100%; width:' + share + '%; background:linear-gradient(90deg, #003057 0%, #0284c7 100%); border-radius:999px;"></div>' +
+            '</div>';
+
+          partContainer.appendChild(row);
+        });
+      }
+
+      // =========================================================
+      // DOM ELEMENTS & EVENT LISTENERS
+      // =========================================================
       var startScreen = document.getElementById("startScreen");
       var quizScreen = document.getElementById("quizScreen");
       var endScreen = document.getElementById("endScreen");
@@ -2562,16 +3013,12 @@
       var startBtn = document.getElementById("startBtn");
       var nextBtn = document.getElementById("nextBtn");
       var playAgainBtn = document.getElementById("playAgainBtn");
-      var viewLeaderboardStartBtn = document.getElementById("viewLeaderboardStartBtn");
-      var openLeaderboardHeaderBtn = document.getElementById("openLeaderboardHeaderBtn");
-      var closeLeaderboardModalBtn = document.getElementById("closeLeaderboardModalBtn");
-      var leaderboardModal = document.getElementById("leaderboardModal");
-
-      var musicToggleBtn = document.getElementById("musicToggleBtn");
-      var soundToggleBtn = document.getElementById("soundToggleBtn");
-      var soundText = document.getElementById("soundText");
 
       var playerNameInput = document.getElementById("playerNameInput");
+      var staffIdInput = document.getElementById("staffIdInput");
+      var validationErrorBox = document.getElementById("validationErrorBox");
+      var validationErrorMsg = document.getElementById("validationErrorMsg");
+
       var unitTagsContainer = document.getElementById("unitTagsContainer");
       var activePlayerTag = document.getElementById("activePlayerTag");
 
@@ -2580,6 +3027,21 @@
       var previewVoiceBtn = document.getElementById("previewVoiceBtn");
       var activeGenderLabel = document.getElementById("activeGenderLabel");
       var replayVoiceBtn = document.getElementById("replayVoiceBtn");
+
+      var musicToggleBtn = document.getElementById("musicToggleBtn");
+      var soundToggleBtn = document.getElementById("soundToggleBtn");
+      var soundText = document.getElementById("soundText");
+
+      var openStatsHeaderBtn = document.getElementById("openStatsHeaderBtn");
+      var viewStatsStartBtn = document.getElementById("viewStatsStartBtn");
+      var viewStatsEndBtn = document.getElementById("viewStatsEndBtn");
+      var statsModal = document.getElementById("statsModal");
+      var closeStatsModalBtn = document.getElementById("closeStatsModalBtn");
+
+      var openLeaderboardHeaderBtn = document.getElementById("openLeaderboardHeaderBtn");
+      var viewLeaderboardStartBtn = document.getElementById("viewLeaderboardStartBtn");
+      var leaderboardModal = document.getElementById("leaderboardModal");
+      var closeLeaderboardModalBtn = document.getElementById("closeLeaderboardModalBtn");
 
       var scenarioCountText = document.getElementById("scenarioCountText");
       var currentScoreSpan = document.getElementById("currentScoreSpan");
@@ -2603,7 +3065,6 @@
       var leaderboardTbody = document.getElementById("leaderboardTbody");
       var modalLeaderboardTbody = document.getElementById("modalLeaderboardTbody");
 
-      // SVG Icon Helpers
       var checkIconSvg = '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>';
       var xIconSvg = '<circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>';
       var shieldChampionSvg = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline>';
@@ -2621,8 +3082,8 @@
         playTone("click");
       });
 
-      // Gender Selection Handling
-      function selectGender(gender) {
+      // Gender Selection
+      function setGender(gender) {
         selectedGender = gender;
         if (gender === "male") {
           genderMaleBtn.classList.add("active");
@@ -2636,28 +3097,32 @@
         playTone("click");
       }
 
-      genderMaleBtn.addEventListener("click", function () {
-        selectGender("male");
-      });
+      genderMaleBtn.addEventListener("click", function () { setGender("male"); });
+      genderFemaleBtn.addEventListener("click", function () { setGender("female"); });
 
-      genderFemaleBtn.addEventListener("click", function () {
-        selectGender("female");
-      });
-
-      // Voice Preview Button
+      // Voice Preview
       previewVoiceBtn.addEventListener("click", function () {
         playTone("click");
-        var rawName = (playerNameInput.value || "").trim();
-        playWelcomeVoiceover(selectedGender, rawName, true);
+        var name = (playerNameInput.value || "").trim();
+        playRealisticVoice(selectedGender, name, true);
       });
 
-      // Replay Voice Button on Quiz Screen
-      if (replayVoiceBtn) {
-        replayVoiceBtn.addEventListener("click", function () {
-          playTone("click");
-          playWelcomeVoiceover(selectedGender, currentPlayerName, false);
-        });
-      }
+      // Voice Replay
+      replayVoiceBtn.addEventListener("click", function () {
+        playTone("click");
+        playRealisticVoice(selectedGender, currentPlayerName, false);
+      });
+
+      // Input change clears errors
+      playerNameInput.addEventListener("input", function () {
+        playerNameInput.classList.remove("input-error");
+        validationErrorBox.classList.add("hidden");
+      });
+      staffIdInput.addEventListener("input", function () {
+        staffIdInput.value = staffIdInput.value.replace(/\D/g, "").slice(0, 5);
+        staffIdInput.classList.remove("input-error");
+        validationErrorBox.classList.add("hidden");
+      });
 
       // Sound Toggle
       soundToggleBtn.addEventListener("click", function () {
@@ -2670,28 +3135,26 @@
       // Render Leaderboard Tables
       function renderLeaderboardInto(tbodyElem, currentHighlightName) {
         var board = getStoredLeaderboard();
-        board.sort(function (a, b) {
-          return b.score - a.score;
-        });
+        board.sort(function (a, b) { return b.score - a.score; });
 
         tbodyElem.innerHTML = "";
         board.slice(0, 10).forEach(function (item, index) {
           var tr = document.createElement("tr");
           var isCurrent = (item.name === currentHighlightName);
-          if (isCurrent) {
-            tr.className = "highlight-user";
-          }
+          if (isCurrent) tr.className = "highlight-user";
 
           var rankContent = index + 1;
           if (index === 0) rankContent = '<span class="rank-medal" title="Gold">🥇</span>';
           else if (index === 1) rankContent = '<span class="rank-medal" title="Silver">🥈</span>';
           else if (index === 2) rankContent = '<span class="rank-medal" title="Bronze">🥉</span>';
 
+          var staffBadge = item.staffId ? ' <span style="font-size:0.75rem; color:#0284c7; font-weight:700;">[' + escapeHtml(item.staffId) + ']</span>' : '';
+
           tr.innerHTML = 
             '<td>' + rankContent + '</td>' +
             '<td>' +
               '<div class="player-col-name">' +
-                '<span>' + escapeHtml(item.name) + (isCurrent ? ' <small style="color:var(--color-blue-accent); font-weight:800;">(You)</small>' : '') + '</span>' +
+                '<span>' + escapeHtml(item.name) + staffBadge + (isCurrent ? ' <small style="color:var(--color-blue-accent); font-weight:800;">(You)</small>' : '') + '</span>' +
                 '<span class="player-col-unit">' + escapeHtml(item.unit) + ' • ' + escapeHtml(item.date || "HQ Shift") + '</span>' +
               '</div>' +
             '</td>' +
@@ -2708,13 +3171,53 @@
         });
       }
 
-      // Start Shift
-      function startGame() {
+      // =========================================================
+      // START QUIZ HANDLER WITH STRICT COMPULSORY VALIDATION
+      // =========================================================
+      function handleStartQuiz() {
         var rawName = (playerNameInput.value || "").trim();
-        currentPlayerName = rawName.length > 0 ? rawName : "Kansanga Defender";
-        
+        var rawStaffId = (staffIdInput.value || "").trim().replace(/\D/g, "");
+
+        var missingName = rawName.length === 0;
+        var missingId = rawStaffId.length === 0;
+        var invalidId = rawStaffId.length > 0 && rawStaffId.length !== 5;
+
+        if (missingName || missingId || invalidId) {
+          playTone("incorrect");
+          validationErrorBox.classList.remove("hidden");
+
+          if (missingName && (missingId || invalidId)) {
+            validationErrorMsg.textContent = "Both Defender Full Name and 5-digit Staff ID Number are compulsory. Please fill both fields before starting your quiz.";
+            playerNameInput.classList.add("input-error");
+            staffIdInput.classList.add("input-error");
+            if (missingName) playerNameInput.focus();
+            else staffIdInput.focus();
+          } else if (missingName) {
+            validationErrorMsg.textContent = "Defender Full Name is compulsory. Please enter your name to proceed.";
+            playerNameInput.classList.add("input-error");
+            playerNameInput.focus();
+          } else if (missingId) {
+            validationErrorMsg.textContent = "Staff ID Number is compulsory. Please enter your 5-digit Staff ID (e.g., 10482) to proceed.";
+            staffIdInput.classList.add("input-error");
+            staffIdInput.focus();
+          } else {
+            validationErrorMsg.textContent = "Staff ID Number must be exactly 5 digits (e.g., 10482 or 58291). Please check and re-enter.";
+            staffIdInput.classList.add("input-error");
+            staffIdInput.focus();
+          }
+          return;
+        }
+
+        // Passed validation!
+        validationErrorBox.classList.add("hidden");
+        playerNameInput.classList.remove("input-error");
+        staffIdInput.classList.remove("input-error");
+
+        currentPlayerName = rawName;
+        currentStaffId = rawStaffId;
+
         var genderIcon = (selectedGender === "female") ? "👩 " : "👨 ";
-        activePlayerTag.textContent = genderIcon + currentPlayerName + " (" + currentDepartment + ")";
+        activePlayerTag.textContent = genderIcon + currentPlayerName + " [" + currentStaffId + "] (" + currentDepartment + ")";
 
         currentIndex = 0;
         score = 0;
@@ -2726,13 +3229,13 @@
 
         playTone("click");
 
-        // Automatically start the Sci-Fi Cyber Music soundtrack
+        // Automatically start the Cyber Music soundtrack if enabled
         if (!musicPlaying) {
           startCyberMusic();
         }
 
-        // Trigger Gender-Specific Welcome Voiceover!
-        playWelcomeVoiceover(selectedGender, currentPlayerName, false);
+        // Trigger realistic studio speech welcome message
+        playRealisticVoice(selectedGender, currentPlayerName, false);
 
         renderScenario();
       }
@@ -2742,32 +3245,25 @@
         answered = false;
         var current = scenarios[currentIndex];
 
-        // Update Counter & Score
         scenarioCountText.textContent = "Scenario " + (currentIndex + 1) + " of " + scenarios.length;
         currentScoreSpan.textContent = score;
-        if (totalScenariosSpan) {
-          totalScenariosSpan.textContent = scenarios.length;
-        }
+        if (totalScenariosSpan) totalScenariosSpan.textContent = scenarios.length;
 
-        // Progress fill percentage
-        var percent = ((currentIndex) / scenarios.length) * 100;
+        var percent = (currentIndex / scenarios.length) * 100;
         progressBar.style.width = percent + "%";
 
-        // Title and Prompt
         scenarioTitle.textContent = current.title;
         scenarioText.textContent = current.text;
 
-        // Reset Feedback and Next button
         feedbackBox.classList.add("hidden");
         feedbackBox.className = "feedback-box hidden";
         nextBtn.classList.add("hidden");
 
-        // Clear and Render 4 Option Buttons
         optionsContainer.innerHTML = "";
         var prefixes = ["A", "B", "C", "D"];
 
         current.options.forEach(function (optText, idx) {
-          var optionNum = idx + 1; // 1-indexed
+          var optionNum = idx + 1;
 
           var btn = document.createElement("button");
           btn.type = "button";
@@ -2794,7 +3290,6 @@
         });
       }
 
-      // Handle Option Selection
       function handleOptionSelect(selectedOptionNum) {
         if (answered) return;
         answered = true;
@@ -2809,15 +3304,12 @@
           playTone("incorrect");
         }
 
-        // Live score display update
         currentScoreSpan.textContent = score;
 
-        // Disable all buttons immediately and highlight
         var optionButtons = optionsContainer.querySelectorAll(".option-btn");
         optionButtons.forEach(function (btn) {
           btn.disabled = true;
           var num = parseInt(btn.getAttribute("data-option-num"), 10);
-
           if (num === current.correctAnswer) {
             btn.classList.add("correct");
           } else if (num === selectedOptionNum && !isCorrect) {
@@ -2825,7 +3317,6 @@
           }
         });
 
-        // Update & show inline feedback box
         if (isCorrect) {
           feedbackBox.className = "feedback-box correct";
           feedbackIcon.innerHTML = checkIconSvg;
@@ -2837,12 +3328,10 @@
         }
         feedbackBox.classList.remove("hidden");
 
-        // Unhide Next Scenario button
         nextBtn.classList.remove("hidden");
         nextBtn.focus();
       }
 
-      // Advance to Next Scenario or End Screen
       function handleNextScenario() {
         playTone("click");
         if (currentIndex < scenarios.length - 1) {
@@ -2853,7 +3342,6 @@
         }
       }
 
-      // Show End Screen
       function showEndScreen() {
         quizScreen.classList.add("hidden");
         endScreen.classList.remove("hidden");
@@ -2864,8 +3352,8 @@
         resultBadge.className = "result-badge-wrap";
         performanceTitle.className = "performance-title";
 
-        var championThreshold = Math.round(scenarios.length * 0.9); // e.g. 9 or 10 out of 10
-        var solidThreshold = Math.round(scenarios.length * 0.6); // e.g. 6 to 8 out of 10
+        var championThreshold = Math.round(scenarios.length * 0.9);
+        var solidThreshold = Math.round(scenarios.length * 0.6);
 
         if (score >= championThreshold) {
           resultBadge.classList.add("champion");
@@ -2891,48 +3379,58 @@
           playTone("incorrect");
         }
 
-        // Add user score to leaderboard
+        // Record departmental score
+        recordDeptQuizResult(currentDepartment, score);
+
+        // Update Leaderboard
         var board = getStoredLeaderboard();
         var existingIdx = -1;
         for (var i = 0; i < board.length; i++) {
-          if (board[i].name === currentPlayerName) {
+          if (board[i].name === currentPlayerName && board[i].staffId === currentStaffId) {
             existingIdx = i;
             break;
           }
         }
         var newRecord = {
           name: currentPlayerName,
+          staffId: currentStaffId,
           unit: currentDepartment,
           score: score,
           date: "Just Now"
         };
         if (existingIdx >= 0) {
-          if (score >= board[existingIdx].score) {
-            board[existingIdx] = newRecord;
-          }
+          if (score >= board[existingIdx].score) board[existingIdx] = newRecord;
         } else {
           board.push(newRecord);
         }
         board.sort(function (a, b) { return b.score - a.score; });
         saveLeaderboard(board);
 
-        // Find user rank
         var userRank = 1;
         for (var j = 0; j < board.length; j++) {
-          if (board[j].name === currentPlayerName) {
+          if (board[j].name === currentPlayerName && board[j].staffId === currentStaffId) {
             userRank = j + 1;
             break;
           }
         }
         playerRankBadge.textContent = "Your Rank: #" + userRank + " of " + board.length;
 
-        // Render Leaderboard on End Screen
         renderLeaderboardInto(leaderboardTbody, currentPlayerName);
-
         playAgainBtn.focus();
       }
 
-      // In-Game / Start-Screen Leaderboard Modal Controls
+      // Modal Controls
+      function openStatsModal() {
+        playTone("click");
+        renderDepartmentStatsDashboard();
+        statsModal.classList.remove("hidden");
+      }
+
+      function closeStatsModal() {
+        playTone("click");
+        statsModal.classList.add("hidden");
+      }
+
       function openLeaderboardModal() {
         playTone("click");
         renderLeaderboardInto(modalLeaderboardTbody, currentPlayerName);
@@ -2944,30 +3442,39 @@
         leaderboardModal.classList.add("hidden");
       }
 
-      // Event Listeners
+      // Event Bindings
+      startBtn.addEventListener("click", handleStartQuiz);
+      nextBtn.addEventListener("click", handleNextScenario);
+      playAgainBtn.addEventListener("click", function () {
+        startScreen.classList.remove("hidden");
+        endScreen.classList.add("hidden");
+        quizScreen.classList.add("hidden");
+      });
+
       if (musicToggleBtn) {
-        musicToggleBtn.addEventListener("click", function () {
-          toggleCyberMusic();
-        });
+        musicToggleBtn.addEventListener("click", toggleCyberMusic);
       }
 
-      startBtn.addEventListener("click", startGame);
-      nextBtn.addEventListener("click", handleNextScenario);
-      playAgainBtn.addEventListener("click", startGame);
+      openStatsHeaderBtn.addEventListener("click", openStatsModal);
+      viewStatsStartBtn.addEventListener("click", openStatsModal);
+      viewStatsEndBtn.addEventListener("click", openStatsModal);
+      closeStatsModalBtn.addEventListener("click", closeStatsModal);
 
-      viewLeaderboardStartBtn.addEventListener("click", openLeaderboardModal);
       openLeaderboardHeaderBtn.addEventListener("click", openLeaderboardModal);
+      viewLeaderboardStartBtn.addEventListener("click", openLeaderboardModal);
       closeLeaderboardModalBtn.addEventListener("click", closeLeaderboardModal);
 
+      statsModal.addEventListener("click", function (e) {
+        if (e.target === statsModal) closeStatsModal();
+      });
       leaderboardModal.addEventListener("click", function (e) {
-        if (e.target === leaderboardModal) {
-          closeLeaderboardModal();
-        }
+        if (e.target === leaderboardModal) closeLeaderboardModal();
       });
 
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && !leaderboardModal.classList.contains("hidden")) {
-          closeLeaderboardModal();
+        if (e.key === "Escape") {
+          if (!statsModal.classList.contains("hidden")) closeStatsModal();
+          if (!leaderboardModal.classList.contains("hidden")) closeLeaderboardModal();
         }
       });
 
